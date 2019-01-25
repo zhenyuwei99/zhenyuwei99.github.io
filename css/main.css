@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
   font-size: 16px;
   line-height: 2;
   color: #555;
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1200px) {
   body {
-    font-size: 18px;
+    font-size: 24px;
   }
 }
 h1,
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'Roboto Slab', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Sans TC', 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
 }
 h1,
 h2,
@@ -227,45 +227,45 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 24px;
+  font-size: 42px;
 }
 h1 code {
-  font-size: 24px;
+  font-size: 42px;
 }
 @media (max-width: 767px) {
   h1 {
-    font-size: 20px;
+    font-size: 38px;
   }
   h1 code {
-    font-size: 20px;
+    font-size: 38px;
   }
 }
 h2 {
-  font-size: 22px;
+  font-size: 34px;
 }
 h2 code {
-  font-size: 22px;
+  font-size: 34px;
 }
 @media (max-width: 767px) {
   h2 {
-    font-size: 18px;
+    font-size: 30px;
   }
   h2 code {
-    font-size: 18px;
+    font-size: 30px;
   }
 }
 h3 {
-  font-size: 20px;
+  font-size: 26px;
 }
 h3 code {
-  font-size: 20px;
+  font-size: 26px;
 }
 @media (max-width: 767px) {
   h3 {
-    font-size: 16px;
+    font-size: 22px;
   }
   h3 code {
-    font-size: 16px;
+    font-size: 22px;
   }
 }
 h4 {
@@ -283,31 +283,31 @@ h4 code {
   }
 }
 h5 {
-  font-size: 16px;
+  font-size: 10px;
 }
 h5 code {
-  font-size: 16px;
+  font-size: 10px;
 }
 @media (max-width: 767px) {
   h5 {
-    font-size: 12px;
+    font-size: 6px;
   }
   h5 code {
-    font-size: 12px;
+    font-size: 6px;
   }
 }
 h6 {
-  font-size: 14px;
+  font-size: 2px;
 }
 h6 code {
-  font-size: 14px;
+  font-size: 2px;
 }
 @media (max-width: 767px) {
   h6 {
-    font-size: 10px;
+    font-size: -2px;
   }
   h6 code {
-    font-size: 10px;
+    font-size: -2px;
   }
 }
 p {
@@ -541,7 +541,7 @@ pre,
 }
 pre,
 code {
-  font-family: 'PT Mono', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: 'PT Mono', consolas, Menlo, "Noto Sans SC", "Noto Serif SC", monospace;
 }
 code {
   overflow-wrap: break-word;
@@ -1177,7 +1177,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 40px;
   font-weight: normal;
-  font-family: 'Lobster Two', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Major Mono Display', 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1270,7 +1270,7 @@ pre .javascript .function {
 .post-body {
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
 }
 .post-body .exturl .fa {
   font-size: 14px;
@@ -1553,7 +1553,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1954,7 +1954,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3dffff;
+  background: #386f54;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2378,7 +2378,7 @@ pre .javascript .function {
 .popular-posts-header {
   margin-top: 60px;
   margin-bottom: 10px;
-  font-size: 26px;
+  font-size: 50px;
   border-bottom: 1px solid #eee;
   display: block;
 }
@@ -2644,7 +2644,7 @@ ul.breadcrumb {
   margin: 1em 0;
   padding: 0 2em;
   text-align: center;
-  font-size: 14px;
+  font-size: 8px;
 }
 ul.breadcrumb li {
   display: inline;
@@ -2865,17 +2865,17 @@ hr {
 }
 .posts-expand .post-title {
   position: relative;
-  font-size: 26px;
+  font-size: 50px;
   font-weight: 400;
 }
 @media (max-width: 767px) {
   .posts-expand .post-title {
-    font-size: 28px;
+    font-size: 32px;
   }
 }
 @media (min-width: 1200px) {
   .posts-expand .post-title {
-    font-size: 32px;
+    font-size: 48px;
   }
 }
 .posts-expand .post-title:hover:before {
@@ -2917,12 +2917,12 @@ hr {
 }
 @media (max-width: 767px) {
   .post-button a {
-    font-size: 14px;
+    font-size: 8px;
   }
 }
 @media (min-width: 1200px) {
   .post-button a {
-    font-size: 18px;
+    font-size: 24px;
   }
 }
 .post-button a:hover {
