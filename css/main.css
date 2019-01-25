@@ -186,8 +186,8 @@ th {
 body {
   position: relative;
   font-family: 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 2;
   color: #555;
   background: #fff;
 }
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1200px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 h1,
@@ -227,87 +227,87 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 44px;
+  font-size: 25px;
 }
 h1 code {
-  font-size: 44px;
+  font-size: 25px;
 }
 @media (max-width: 767px) {
   h1 {
-    font-size: 40px;
+    font-size: 21px;
   }
   h1 code {
-    font-size: 40px;
+    font-size: 21px;
   }
 }
 h2 {
-  font-size: 38px;
+  font-size: 22px;
 }
 h2 code {
-  font-size: 38px;
+  font-size: 22px;
 }
 @media (max-width: 767px) {
   h2 {
-    font-size: 34px;
+    font-size: 18px;
   }
   h2 code {
-    font-size: 34px;
+    font-size: 18px;
   }
 }
 h3 {
-  font-size: 32px;
+  font-size: 19px;
 }
 h3 code {
-  font-size: 32px;
+  font-size: 19px;
 }
 @media (max-width: 767px) {
   h3 {
-    font-size: 28px;
+    font-size: 15px;
   }
   h3 code {
-    font-size: 28px;
+    font-size: 15px;
   }
 }
 h4 {
-  font-size: 26px;
+  font-size: 16px;
 }
 h4 code {
-  font-size: 26px;
+  font-size: 16px;
 }
 @media (max-width: 767px) {
   h4 {
-    font-size: 22px;
+    font-size: 12px;
   }
   h4 code {
-    font-size: 22px;
+    font-size: 12px;
   }
 }
 h5 {
-  font-size: 20px;
+  font-size: 13px;
 }
 h5 code {
-  font-size: 20px;
+  font-size: 13px;
 }
 @media (max-width: 767px) {
   h5 {
-    font-size: 16px;
+    font-size: 9px;
   }
   h5 code {
-    font-size: 16px;
+    font-size: 9px;
   }
 }
 h6 {
-  font-size: 14px;
+  font-size: 10px;
 }
 h6 code {
-  font-size: 14px;
+  font-size: 10px;
 }
 @media (max-width: 767px) {
   h6 {
-    font-size: 10px;
+    font-size: 6px;
   }
   h6 code {
-    font-size: 10px;
+    font-size: 6px;
   }
 }
 p {
@@ -1175,7 +1175,7 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: normal;
   font-family: 'Major Mono Display', 'Noto Sans TC', "Noto Sans SC", "Noto Serif SC", sans-serif;
 }
@@ -1287,7 +1287,7 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: -20px auto 15px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #999;
   font-weight: bold;
   line-height: 1;
@@ -1660,7 +1660,7 @@ pre .javascript .function {
 }
 .posts-expand .post-eof {
   display: block;
-  margin: 80px auto 60px;
+  margin: 160px auto 60px;
   width: 8%;
   height: 1px;
   background: #ccc;
@@ -1954,7 +1954,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #78f794;
+  background: #f738ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2378,7 +2378,7 @@ pre .javascript .function {
 .popular-posts-header {
   margin-top: 60px;
   margin-bottom: 10px;
-  font-size: 50px;
+  font-size: 28px;
   border-bottom: 1px solid #eee;
   display: block;
 }
@@ -2390,9 +2390,9 @@ ul.popular-posts .popular-posts-item {
 }
 ul.popular-posts .popular-posts-item .popular-posts-title {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
-  line-height: 1.68;
+  line-height: 2.4;
 }
 .page-archive .archive-page-counter {
   position: relative;
@@ -2644,7 +2644,7 @@ ul.breadcrumb {
   margin: 1em 0;
   padding: 0 2em;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
 }
 ul.breadcrumb li {
   display: inline;
@@ -2865,17 +2865,17 @@ hr {
 }
 .posts-expand .post-title {
   position: relative;
-  font-size: 50px;
+  font-size: 28px;
   font-weight: 400;
 }
 @media (max-width: 767px) {
   .posts-expand .post-title {
-    font-size: 22px;
+    font-size: 37px;
   }
 }
 @media (min-width: 1200px) {
   .posts-expand .post-title {
-    font-size: 34px;
+    font-size: 43px;
   }
 }
 .posts-expand .post-title:hover:before {
@@ -2883,7 +2883,7 @@ hr {
 }
 @media (max-width: 767px) {
   .posts-expand .post-body {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .posts-expand .post-body img {
@@ -2909,7 +2909,7 @@ hr {
 }
 .post-button a {
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
   background: none;
   border: none;
   border-bottom: 2px solid #666;
@@ -2917,12 +2917,12 @@ hr {
 }
 @media (max-width: 767px) {
   .post-button a {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 @media (min-width: 1200px) {
   .post-button a {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 .post-button a:hover {
