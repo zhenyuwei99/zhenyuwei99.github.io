@@ -227,87 +227,87 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 42px;
+  font-size: 46px;
 }
 h1 code {
-  font-size: 42px;
+  font-size: 46px;
 }
 @media (max-width: 767px) {
   h1 {
-    font-size: 38px;
+    font-size: 42px;
   }
   h1 code {
-    font-size: 38px;
+    font-size: 42px;
   }
 }
 h2 {
-  font-size: 34px;
+  font-size: 42px;
 }
 h2 code {
-  font-size: 34px;
+  font-size: 42px;
 }
 @media (max-width: 767px) {
   h2 {
-    font-size: 30px;
+    font-size: 38px;
   }
   h2 code {
-    font-size: 30px;
+    font-size: 38px;
   }
 }
 h3 {
-  font-size: 26px;
+  font-size: 38px;
 }
 h3 code {
-  font-size: 26px;
+  font-size: 38px;
 }
 @media (max-width: 767px) {
   h3 {
-    font-size: 22px;
+    font-size: 34px;
   }
   h3 code {
-    font-size: 22px;
+    font-size: 34px;
   }
 }
 h4 {
-  font-size: 18px;
+  font-size: 34px;
 }
 h4 code {
-  font-size: 18px;
+  font-size: 34px;
 }
 @media (max-width: 767px) {
   h4 {
-    font-size: 14px;
+    font-size: 30px;
   }
   h4 code {
-    font-size: 14px;
+    font-size: 30px;
   }
 }
 h5 {
-  font-size: 10px;
+  font-size: 30px;
 }
 h5 code {
-  font-size: 10px;
+  font-size: 30px;
 }
 @media (max-width: 767px) {
   h5 {
-    font-size: 6px;
+    font-size: 26px;
   }
   h5 code {
-    font-size: 6px;
+    font-size: 26px;
   }
 }
 h6 {
-  font-size: 2px;
+  font-size: 26px;
 }
 h6 code {
-  font-size: 2px;
+  font-size: 26px;
 }
 @media (max-width: 767px) {
   h6 {
-    font-size: -2px;
+    font-size: 22px;
   }
   h6 code {
-    font-size: -2px;
+    font-size: 22px;
   }
 }
 p {
@@ -1954,7 +1954,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #386f54;
+  background: #d94dff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2870,12 +2870,12 @@ hr {
 }
 @media (max-width: 767px) {
   .posts-expand .post-title {
-    font-size: 32px;
+    font-size: 36px;
   }
 }
 @media (min-width: 1200px) {
   .posts-expand .post-title {
-    font-size: 48px;
+    font-size: 44px;
   }
 }
 .posts-expand .post-title:hover:before {
