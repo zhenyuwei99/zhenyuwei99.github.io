@@ -186,7 +186,7 @@ th {
 body {
   position: relative;
   font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 2;
   color: #555;
   background: #fff;
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1200px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 h1,
@@ -1179,7 +1179,7 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: normal;
   font-family: 'Lobster Two', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -1291,7 +1291,7 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: -20px auto 15px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #999;
   font-weight: bold;
   line-height: 1;
@@ -1958,7 +1958,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #460bd0;
+  background: #ffb3b4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2394,7 +2394,7 @@ ul.popular-posts .popular-posts-item {
 }
 ul.popular-posts .popular-posts-item .popular-posts-title {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   line-height: 2.4;
 }
@@ -2648,7 +2648,7 @@ ul.breadcrumb {
   margin: 1em 0;
   padding: 0 2em;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
 }
 ul.breadcrumb li {
   display: inline;
@@ -2874,12 +2874,12 @@ hr {
 }
 @media (max-width: 767px) {
   .posts-expand .post-title {
-    font-size: 22px;
+    font-size: 28px;
   }
 }
 @media (min-width: 1200px) {
   .posts-expand .post-title {
-    font-size: 26px;
+    font-size: 32px;
   }
 }
 .posts-expand .post-title:hover:before {
@@ -2887,7 +2887,7 @@ hr {
 }
 @media (max-width: 767px) {
   .posts-expand .post-body {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .posts-expand .post-body img {
@@ -2913,7 +2913,7 @@ hr {
 }
 .post-button a {
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
   background: none;
   border: none;
   border-bottom: 2px solid #666;
@@ -2921,12 +2921,12 @@ hr {
 }
 @media (max-width: 767px) {
   .post-button a {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 @media (min-width: 1200px) {
   .post-button a {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 .post-button a:hover {
