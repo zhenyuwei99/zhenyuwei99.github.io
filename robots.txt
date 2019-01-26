@@ -1,5 +1,5 @@
 User-agent: *
-Allow: /sitemap.xml/
+Allow: /j
 Allow: /archives/
 Allow: /categories/
 Allow: /tags/
