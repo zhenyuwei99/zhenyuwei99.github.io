@@ -1954,7 +1954,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3767ff;
+  background: #d0b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2991,4 +2991,7 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+.image-size-200 img {
+  width: 200px;
 }
