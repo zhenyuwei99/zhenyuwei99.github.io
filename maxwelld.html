@@ -148,19 +148,20 @@
 
 
 
-  <meta name="description" content="hyh">
+  <meta name="description" content="本文将从源头推导麦克斯韦分布律的函数表达式，并同时推导三种具有较大实际意义的统计速率。考虑到微观分子可能的量子效应，本文同时也包含了对与麦克斯韦分布经典描述有效性的讨论">
 <meta name="keywords" content="统计物理,微观,公式证明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="麦克斯韦速率分布律的证明">
 <meta property="og:url" content="https://madwayne.com/maxwelld.html">
 <meta property="og:site_name" content="Mad   Wayne">
-<meta property="og:description" content="hyh">
+<meta property="og:description" content="本文将从源头推导麦克斯韦分布律的函数表达式，并同时推导三种具有较大实际意义的统计速率。考虑到微观分子可能的量子效应，本文同时也包含了对与麦克斯韦分布经典描述有效性的讨论">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/maxwelld/jifenqujian.png">
-<meta property="og:updated_time" content="2019-02-08T02:59:53.651Z">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/maxwelld/maxwell.png">
+<meta property="og:updated_time" content="2019-02-14T04:08:42.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="麦克斯韦速率分布律的证明">
-<meta name="twitter:description" content="hyh">
+<meta name="twitter:description" content="本文将从源头推导麦克斯韦分布律的函数表达式，并同时推导三种具有较大实际意义的统计速率。考虑到微观分子可能的量子效应，本文同时也包含了对与麦克斯韦分布经典描述有效性的讨论">
 <meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/maxwelld/jifenqujian.png">
 
 
@@ -475,7 +476,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-08 10:59:53" itemprop="dateModified" datetime="2019-02-08T10:59:53+08:00">2019-02-08</time>
+                <time title="修改时间：2019-02-14 12:08:42" itemprop="dateModified" datetime="2019-02-14T12:08:42+08:00">2019-02-14</time>
               
             
           </span>
@@ -532,7 +533,7 @@
           
 
           
-            <div class="post-description">hyh</div>
+            <div class="post-description">本文将从源头推导麦克斯韦分布律的函数表达式，并同时推导三种具有较大实际意义的统计速率。考虑到微观分子可能的量子效应，本文同时也包含了对与麦克斯韦分布经典描述有效性的讨论</div>
           
 
         </div>
@@ -624,6 +625,11 @@
 <p>需要注意的是，式（\ref{max}）所表示的是速度平方的分布特征。若要考虑速率的分布特征则无需考虑速度的方向问题，即无需考虑其在相空间$(v_x,v_y,v_z)$中的位置，只考虑其到原点的距离。故可得：<br>$$\begin{equation}<br>F(u)=\frac{dN}{N}=f(v^2)4\pi v^2dv \label{maxu}<br>\end{equation}$$</p>
 <p>由式（\ref{maxu}）可得：</p>
 <p>$$\begin{equation}<br>f(u)=\frac{dN}{Ndv}=\frac{F(u)}{dv}=4\pi u^2(\frac{m}{2\pi kT})^{\frac{3}{2}}e^{-\frac{m}{kT}u^2} \label{maxuq}<br>\end{equation}$$<br>式（\ref{maxuq}）即为麦克斯韦速率分布的表达式，证毕。</p>
+<p><div class="image-size-400" align="center"><br><img src="/zhenyuwei99.github.io/maxwelld/maxwell.png" title="[积分区间，图源Wikipedia]"><br></div></p>
+<h2 id="三种统计速率的计算"><a href="#三种统计速率的计算" class="headerlink" title="三种统计速率的计算"></a>三种统计速率的计算</h2><h3 id="最慨然速率-v-p"><a href="#最慨然速率-v-p" class="headerlink" title="最慨然速率 $v_p$"></a>最慨然速率 $v_p$</h3><p>由上图不难看出麦克斯韦分布中会出现一个峰值，最概然速率所代表的即是是$f(u)$函数分布的峰值所对应的速率，即出现概率最大的速率。由于$f(u)$在定义域内可导，故对$f(u)$求导，寻取驻点：<br>$$4\pi (\frac{m}{2\pi kT})^{\frac{3}{2}}e^{-\frac{m}{kT}v^2}(2v-\frac{mv^3}{kT})=0$$<br>由于前三项均不可能为0，故可得：<br>\begin{equation}<br>v_p=\sqrt{\frac{2kT}{m}}\approx1.41\sqrt{\frac{kT}{m}} \label{eqvmax}<br>\end{equation}</p>
+<h3 id="平均速率-bar-v"><a href="#平均速率-bar-v" class="headerlink" title="平均速率 $\bar v$"></a>平均速率 $\bar v$</h3><p>平均速率即为所有分子速率的平均值，介于我们已经获得了速率分布的概率密度函数，则在全空间上做加权平均即可获得结果，故得：<br>\begin{equation}<br>\bar v=\int_{0}^{+\infty}vf(u)dv \label{eqvbar}<br>\end{equation}<br>式（\ref{eqvbar}）可化为：<br>$$\bar v=2\pi (\frac{m}{2\pi kT})^\frac{3}{2}(\frac{2kT}{m})^2\int_{0}^{+\infty}\frac{mv^2}{2kT}e^{-\frac{mv^2}{2kT}}d\frac{mv^2}{2kT}$$<br>上式中的积分项即等于$\Gamma(2)=1\times\Gamma(1)=1$,由此可得：<br>\begin{equation}<br>\bar v=\sqrt{\frac{8kT}{\pi m} }\approx1.60\sqrt{\frac{kT}{m}}<br>\end{equation}</p>
+<h3 id="方均根速率-v-rms"><a href="#方均根速率-v-rms" class="headerlink" title="方均根速率 $v_{rms}$"></a>方均根速率 $v_{rms}$</h3><p>求解$v_{rms}$可先求解$\bar{v^2}$，求解方法与$\bar v$类似，即：<br>\begin{equation}<br>\bar{v^2}=\int_{0}^{+\infty}v^2f(u)dv \label{eqv2bar}<br>\end{equation}<br>式（\ref{eqv2bar}）可化为：<br>$$\bar{v^2}=\frac{2}{\sqrt{\pi}}\frac{2kT}{m}\int_{0}^{+\infty}(\frac{mv^2}{2kT})^{\frac{3}{2}}e^{-\frac{mv^2}{2kT}}d\frac{mv^2}{2kT}$$<br>上式中积分项则根据定义可得为：$\Gamma(\frac{5}{2})=\frac{3}{2}\times\frac{1}{2}\times\Gamma(\frac{1}{2})=\frac{3}{4}\sqrt{\pi}$，带入可解得：<br>\begin{equation}<br>v_{rms}=\sqrt{\bar{v^2}}=\sqrt{\frac{3kT}{m}}\approx1.73\sqrt{\frac{kT}{m}} \label{eqv2bar1}<br>\end{equation}</p>
+<h2 id="麦克斯韦分布经典描述的有效性"><a href="#麦克斯韦分布经典描述的有效性" class="headerlink" title="麦克斯韦分布经典描述的有效性"></a>麦克斯韦分布经典描述的有效性</h2><p>由于麦克斯韦分布描述的是理想气体的运动分布情况，我们不得不考虑量子效应。然而如果能够判断何种情况下对于其进行经典讨论时是有效的，则能大大降低计算的复杂程度以及实验成本。故根据海森伯测不准关系：<br>$$s_0p_0\gg\hbar$$<br>即<br>\begin{equation}<br>s_0\gg \frac{\hbar}{p_0}=\frac{\lambda_0}{2\pi} \label{eqj}<br>\end{equation}<br>即分子间的距离必须远远大于特征德布罗意波的波长经典讨论才是有效的。<br>在NVT系综中，由于分子均匀分布可得：<br>\begin{equation}<br>s_0^3N=V \label{eqs0}<br>\end{equation}<br>分子动量的特征值$p_0$可由该分子最概然速率$v_p$求得：<br>\begin{equation}<br>p_0\approx mv_p=\sqrt{2mkT} \label{eqp0}<br>\end{equation}<br>将式（\ref{eqs0}）以及式（\ref{eqp0}）带入式（\ref{eqj}）可得若经典讨论成立有：<br>\begin{equation}<br>\frac{\lambda_0}{2\pi s_0}= \hbar\frac{n^{\frac{1}{3}}}{\sqrt{2mkT}}\ll 1 \label{eqj1}<br>\end{equation}<br>即当$n$足够小，即气体足够稀薄以及$T$足够高时，由海森伯测不准原理这一判据我们可以得到经典讨论有效，无需考虑量子效应。</p>
 
       
     </div>
@@ -697,6 +703,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/zhenyuwei99.github.io/liulangdiqiu.html" rel="prev" title="liulangdiqiu">
+                liulangdiqiu <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -774,7 +784,7 @@
                 
                   <a href="/zhenyuwei99.github.io/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -791,7 +801,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -810,7 +824,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -895,7 +913,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#假设以及符号说明"><span class="nav-text">假设以及符号说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设"><span class="nav-text">假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号说明"><span class="nav-text">符号说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式推导"><span class="nav-text">公式推导</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#假设以及符号说明"><span class="nav-text">假设以及符号说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#假设"><span class="nav-text">假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号说明"><span class="nav-text">符号说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式推导"><span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种统计速率的计算"><span class="nav-text">三种统计速率的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最慨然速率-v-p"><span class="nav-text">最慨然速率 $v_p$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平均速率-bar-v"><span class="nav-text">平均速率 $\bar v$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方均根速率-v-rms"><span class="nav-text">方均根速率 $v_{rms}$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#麦克斯韦分布经典描述的有效性"><span class="nav-text">麦克斯韦分布经典描述的有效性</span></a></li></ol></div>
             
 
           </div>
