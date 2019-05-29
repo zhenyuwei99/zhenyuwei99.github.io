@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next mist" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Major Mono Display:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhenyuwei99.github.io/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","width":280,"display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="As blogger&apos;s major is ME, and most of readers of this article will also be those who don&apos;t have enough background knowledge for the high level mathmatic, this note will emphsize on the application of">
+<meta name="keywords" content="MadWayne | 卫振宇的博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struggle With Fourier and Laplace Transformation">
+<meta property="og:url" content="https://madwayne.com/LaplaceTansfer.html">
+<meta property="og:site_name" content="Mad   Wayne">
+<meta property="og:description" content="As blogger&apos;s major is ME, and most of readers of this article will also be those who don&apos;t have enough background knowledge for the high level mathmatic, this note will emphsize on the application of">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/square.png">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/squarewave.jpg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/niu.gif">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/bn.png">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/lap.gif">
+<meta property="og:updated_time" content="2019-05-29T08:12:57.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Struggle With Fourier and Laplace Transformation">
+<meta name="twitter:description" content="As blogger&apos;s major is ME, and most of readers of this article will also be those who don&apos;t have enough background knowledge for the high level mathmatic, this note will emphsize on the application of">
+<meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer/square.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://madwayne.com/LaplaceTansfer.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Struggle With Fourier and Laplace Transformation | Mad   Wayne</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhenyuwei99.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mad   Wayne</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">一个闲的无聊的SB写的Blog。ME专业本科生，喜爱各类难搞话题以及各种无聊笑话,如果你很无聊或者你很难搞请马上email联系我。</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于我</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madwayne.com/zhenyuwei99.github.io/LaplaceTansfer.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhenyuWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/zhenyuwei99.github.io/images/MW3.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mad   Wayne">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Struggle With Fourier and Laplace Transformation
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-27 18:33:43" itemprop="dateCreated datePublished" datetime="2019-05-27T18:33:43+08:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-29 16:12:57" itemprop="dateModified" datetime="2019-05-29T16:12:57+08:00">2019-05-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/zhenyuwei99.github.io/LaplaceTansfer.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/zhenyuwei99.github.io/LaplaceTansfer.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            <div class="post-description">As blogger's major is ME, and most of readers of this article will also be those who don't have enough background knowledge for the high level mathmatic, this note will emphsize on the application of the Fourier and Laplace transformation in the engineering fileds. I will also try my best to interpret those two complictaed therom with my personal understanding instead of tedious mathematical demonstration.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Fourier-Series"><a href="#1-Fourier-Series" class="headerlink" title="1. Fourier Series"></a>1. Fourier Series</h2><h3 id="1-1-Fourier-Therom"><a href="#1-1-Fourier-Therom" class="headerlink" title="1.1 Fourier Therom"></a>1.1 Fourier Therom</h3><p>Anyway, long long ago, a hero named Fourier saved the world from the ruling of complicated periodic function when he found that any function like that could be composed by a infinte series of sine and cosine function which was big deal even for the acient mathematicians. So the Fourier Therom could be represented as:</p>
+<p>$$<br>\begin{equation}<br>f(x)=a_0+a_1cos(x)+a_2cos(2x)+ \cdots  +a_ncos(nx) \\<br>\qquad \ \ \ \ +b_1sin(x)+b_2sin(2x)+ \cdots  +b_nsin(nx)  \label{eq01}<br>\end{equation}<br>$$<br>Where $f(x)$ is a periodic function whose $T=\frac{2\pi}{1}=2\pi$.</p>
+<p>In the other form:<br>$$<br>\begin{equation}<br>f(x)=a_0+\sum_{n=1}^{\infty}a_ncos(nx)+b_nsin(nx)<br>\end{equation}<br>$$<br>The formal proof of the general Fourier Therom for all restricted but arbitary functions is carried by <strong>Dirichlet</strong>, and we call the conditions those functions in 1829, which could be extent to the Fourier Series, should satisfied <strong>Dirichlet Condition</strong>.</p>
+<h3 id="1-2-Fourier-Coeffcients"><a href="#1-2-Fourier-Coeffcients" class="headerlink" title="1.2 Fourier Coeffcients"></a>1.2 Fourier Coeffcients</h3><p><strong><em>What does $\ a_n \ $ and $\ b_n \ $ mean and how to define them?</em></strong></p>
+<p>We can take $a_n$ and $b_n$ as the amplitude of sine and cosine function with differnt frequencies, the higer amplitude, the more important role this specif function plays in the serie. And we will call them as <strong>Fourier Coeffcients</strong></p>
+<p>When we want to define them, we need to know some extraordinary propeties of those trigonometric function:<br>$$<br>\begin{equation}<br>\int_{-\pi}^{\pi}cos(nx)sin(mx)dx=<br>\int_{-\pi}^{\pi}\frac{1}{2}  \left[ sin(nx+mx)-sin(nx-mx) \right ]= 0 \label{eq02}<br>\end{equation}<br>$$<br>Equation \ref{eq02} uses Prosthaphaeresis Formulas and property of trigonometric function—intergration over a period is 0.<br>$$<br>\int_{-\pi}^{\pi}cos(nx)cos(mx)=\left\{<br>\begin{aligned}<br>\ \pi &amp; , m=n \\<br>0 &amp; , m\neq n<br>\end{aligned}<br>\right.<br>$$<br>$$<br>\int_{-\pi}^{\pi}sin(nx)sin(mx)=\left\{<br>\begin{aligned}<br>\ \pi &amp; , m=n \\<br>0 &amp; , m\neq n<br>\end{aligned}<br>\right.<br>$$</p>
+<p>The mechanism of above two intergrations are same with what we use in equation \ref{eq02}.<br>Through those properties of trigonometric function we can get those Coeffcients.<br>$$<br>\begin{equation}<br>\int_{-\pi}^{\pi}f(x)sin(mx)dx= b_m\int_{-\pi}^{\pi}sin^2(mx)  \label{eq03}<br>\end{equation}<br>$$<br>As all the intergals, except which showed in the right side of equation \ref{eq03}, vanish, we can get:<br>$$<br>b_m=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)sin(mx)dx\; ; \qquad m=1,2,3,\cdots \label{eqbn}<br>$$<br>In the same way we could get $a_n$:<br>$$<br>a_m=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)cos(mx)dx\; ; \qquad m=1,2,3,\cdots \label{eqan}<br>$$<br>Noticeably, there are some differences when it comes to $a_0$:<br>$$<br>a_0=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)dx<br>$$<br>Actually, it’s quiet interesting to note that <strong>$a_0$ is actually the average of $f(x)$ in the interval from $-\pi$ to $\pi$</strong>. I would like to call this constant as a basic wave for the whole series which decides where the following trigonometric functions will display their waves. More detail could be seen in the Sec 1.3.</p>
+<h3 id="1-3-Extension-of-interval"><a href="#1-3-Extension-of-interval" class="headerlink" title="1.3 Extension of interval"></a>1.3 Extension of interval</h3><p>In most occasion, we need to face the signals and functions that have different periods, $2T$ for example, rather than have the specific period of $2\pi$. To enchant this weapon, we introduce the transformation variable:<br>$$<br>\begin{equation}<br>u=\frac{2\pi}{2T}t<br>\end{equation}<br>$$<br>The role $u$ played is to shrink or expand the period of specific functions as when $\pm x \to \pm T\; , \; \pm u \to \pm \pi$. So we have:<br>$$<br>\begin{equation}<br>a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f\left(\frac{T}{\pi}u\right)cos(nu)du=\frac{1}{T}\int_{-T}^{T}f(t)cos\left(\frac{n\pi}{T}t\right)dt \\<br>b_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f\left(\frac{T}{\pi}u\right)sin(nu)du=\frac{1}{T}\int_{-T}^{T}f(t)sin\left(\frac{n\pi}{T}t\right)dt \\<br>a_0=\frac{1}{2\pi}\int_{-\pi}^{\pi}f\left(\frac{T}{\pi}u\right)du=\frac{1}{2T}\int_{-T}^{T}f(t)dt \label{eqextend}<br>\end{equation}<br>$$</p>
+<h3 id="1-4-A-simple-example"><a href="#1-4-A-simple-example" class="headerlink" title="1.4 A simple example"></a>1.4 A simple example</h3><p>So far, through equation \ref{eqextend}, we could transformation any periodic functions into Fourier series. Now let’s take a suqare wave — one of the most common waveforms that we need handle for the signal processing, whose period is $T=4s$ and $Vpp=6V$. The waveform is shown in the following picture.</p>
+<div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/LaplaceTansfer/square.png" title="[Square Wave]"><br></div><br>We can give the $f(t)$ in the section of $[-2,2]$ as:<br>$$<br>f(t)=\left\{<br>\begin{aligned}<br>-3 &amp; , -2\leq t &lt; 0\\<br>3 &amp; , 0 \leq t \leq 2<br>\end{aligned}<br>\right.<br>$$<br>Using equation \ref{eqextend} we can get:<br>$$<br>\begin{equation}<br>a_n=\frac{1}{2}\left(\int_{-2}^{0}-3cos(\frac{n\pi}{2}t)dt+\int_{0}^{2}3cos(\frac{n\pi}{2}t)dt\right)=0 \quad n=1,2,3,\cdots\\<br>b_n=\frac{1}{2}\left(\int_{-2}^{0}-3sin(\frac{n\pi}{2}t)dt+\int_{0}^{2}3sin(\frac{n\pi}{2}t)dt\right)=\frac{12}{n\pi}\quad n=1,3,5,\cdots\\<br>a_0=\frac{1}{4}\left(\int_{-2}^{0}-3dt+\int_{0}^{2}3)dt\right)=0 \label{eqsquare}<br>\end{equation}<br>$$<br>Through equation \ref{eqsquare} we can rewrite $f(t)$ as:<br>$$<br>\begin{equation}<br>f(t)=\lim_{m\to \infty}\sum_{n=1}^{m}\frac{12}{(2n-1)\pi}sin\left(\frac{(2n-1)\pi}{T}t\right) \label{eq09}<br>\end{equation}<br>$$<br>The following picture shows differnt series when $\;m=2\;$,$\;m=5\;$,$\;m=10\;$, drawn in orange, blue and black respectively. And the following GIF could help us to relaize how the Fourier Series works more directly.<br><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/LaplaceTansfer/squarewave.jpg" title="[Graphic Fourier Series]"><br></div><br><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/LaplaceTansfer/niu.gif" title="[From Internet]"><br></div><br>We could also represent $f(t)$ in another way which we called frequency spectrum like the following picture. In the frequency spectrum we can recogonize the importance of the waves with different frequencies.<br><br><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/LaplaceTansfer/bn.png" title="[Frequency spectrum]"><br></div><br>We can find that with the growth of $\; m\;$, the series’s graphic will progress step by step to the real one. Now we have already got the weapon to fight with the <strong>periodic</strong> functions. But what can we do with <strong>aperiodic</strong> one. The answer is we need much powerful weapon, whose name is <strong>Fourier Transformation</strong>.<br><br>## 2. Fourier Transformation<br><br>### 2.1 Little tricks on Fourier Series<br><br>We find it’s cumbersome on both writing the equation and calculating the intergrations in form of trigonometric function. So we need do some little tricks on it.<br>First, we will replace $\; \frac{2\pi}{2T}$ with $\omega_1$. Next, by manipulating Euler’s Formula:<br>$$<br>\\<br>e^{in\omega_1 t}=cos(n\omega_1t)+isin(n\omega_1t) \\<br>e^{-in\omega_1 t}=cos(n\omega_1t)-isin(n\omega_1t)<br>$$<br>we could get:<br>$$<br>\begin{equation}<br>cos(n\omega_1 t)=\frac{e^{in\omega_1 t}+e^{-in\omega_1 t}}{2} \\<br>sin(n\omega_1 t)=\frac{e^{in\omega_1 t}-e^{-in\omega_1 t}}{2i} \label{eqi}<br>\end{equation}<br>$$<br>Then substitute equation \ref{eqi} to  Fourier Series, we can get:<br>$$<br>f(t)=a_0+\sum_{n=1}^{\infty}\left( \frac{a_n-b_ni}{2}e^{in\omega_1 t} + \frac{a_n+b_ni}{2}e^{-in\omega_1 t} \right)<br>$$<br>Now let’s look back to our derivation of $\; a_n\;$ and $\; b_n\;$ in equation \ref{eqextend} we could find that $\; a_n\;$ is actually an odd function of n while $\; b_n\;$ is an even one. And we assume that:<br>$$F(n\omega_1)=\frac{a_n-b_ni}{2}$$<br>With the following properties we can say that:<br>$$\frac{a_n+b_ni}{2}=F(-n\omega_1)<br>$$<br>If we assume $\; a_0=F(0)\;$, equation\ref{eqi} can be rewriten into:<br>$$<br>\begin{equation}<br>f(t)=\sum_{-\infty}^{\infty}F(n\omega_1)e^{in\omega_1t} \label{eq10}<br>\end{equation}<br>$$<br>And with the propery of exponential function we can get:<br>$$<br>\begin{equation}<br>F(n\omega_1)=\frac{1}{2T}\int_{-T}^{T}f(t)e^{-in\omega_1t}dt \label{eq11}<br>\end{equation}<br>$$<br>Now we have got the exponential representation of thr Fourier Series. I will call $\; F(n\omega_1)\;$ as <strong>spectrum coeffcient</strong>.<br><br>### 2.2 Strategy for the aperiodic functions<br>As we have mentioned before, the Fourier Series could only be used to represent some special (we will discuss in Sec3) periodic functions. The only thing we need to do to extend the application is to treat the aperiodic functions as a periodic one whose $\; T\to \infty\;$, which also means $\; \omega_1\to 0$.<br><strong>What will happend with that?</strong> The frequency spectrum will be a continuous function instead of what we say in the above picture.<br>If we look back to equation \ref{eq11} we could find that $\;F(n\omega_1)\to 0\;$ which means this constant is useless or meaningless in this occasion. What we will do is to producting $2T$ on both side of equation\ref{eq11}:<br>$$<br>\begin{equation}<br>\frac{F(n\omega_1)}{\frac{1}{T}}=\int_{-\frac{T}{2}}^{\frac{T}{2}}f(t)e^{-in\omega_1t}dt \label{eq12}<br>\end{equation}<br>$$<br>I need to point that in equation\ref{eq12}, I assume period of $\; f(t)\;$ is $\; T\;$, instead of $\; 2T\;$ what we assumed before. And if we could realize that $\; \frac{1}{T}=k\;$, we could introduce a new coeffcient, the spectrum density coeffcient,$\;F(\omega)\;$, name of which could be interpret it is the average amplitude the unity of frequency. In this way we could get:<br>$$<br>\begin{equation}<br>F(\omega)=\mathscr{F}\left(f(t)\right)=\int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \label{eq13}<br>\end{equation}<br>$$<br>Equation \ref{eq13} is the weapon that we could utilize to handle the aperiodic function and we call it as Fourier Transformation.<br>Correspondingly we give the inverse process of Fourier Transformation:<br>$$<br>f(t)=\mathscr{F}^{-1} \left( F(\omega)\right)=\int_{-\infty}^{\infty}F(\omega)e^{i\omega t}dt<br>$$<br>## 3. Laplace Transformation<br><br>### 3.1 The most powerful weapon<br>Even if we have g forge two extraordinary swords—Fourier Series and Fourier Transformation, we are still helpless when we are dealing with some <strong>functions that will not converge</strong>— not satisfied the Dirichlet Condition. While most signals we need to handle is depend on time, which won’t be less than 0, the only thing we need to do is add an negative exponent to $\; f(t)\;$ as:<br>$$<br>\begin{equation}<br>F(\omega)=\mathscr{L}\left(f(t) \right)=\int_{0}^{\infty}f(t)e^{-\sigma t}e^{-i\omega t}dt=\int_{0}^{\infty}f(t)e^{-st}dt \label{eqlaplace}<br>\end{equation}<br>$$<br>Where $\; s=\sigma+i\omega \;$, equation \ref{eqlaplace} is actually “Excalibur” forged by Laplace called Laplace Transformation. We can see the effect of $e^{\; -\sigma t\;}$ with the following GIF.<br><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/LaplaceTansfer/lap.gif" title="[Function transformation]"><br></div>
+
+<h3 id="3-2-Application-of-solving-partial-differential-equation"><a href="#3-2-Application-of-solving-partial-differential-equation" class="headerlink" title="3.2 Application of solving partial-differential equation"></a>3.2 Application of solving partial-differential equation</h3><p>So far, we have already give the defination and the derivation of Laplace Transformation. Here is the question: <strong>What can we do with this weapon in the engineering area?</strong></p>
+<p>First, let’s see some excellent usage of Laplace Transformation:</p>
+<p>$$<br>\begin{equation}<br>\mathscr{L}\left(\frac{df}{dt}\right)=f(t)e^{-st}\vert_{0}^{\infty} -(-s)\int_{0}^{\infty}e^{-st}f(t)dt=s\mathscr{L}\left(f(t)\right)-f(0) \label{eqf1}<br>\end{equation}<br>$$<br>With the same thought, we could also get:<br>$$<br>\begin{equation}<br>\mathscr{L}\left(\frac{d^2f}{dt^2}\right)=s^2\mathscr{L}\left(f(t)\right)-sf(0)-\frac{df}{dt}\vert_{t=0} \label{eqf2}<br>\end{equation}<br>$$<br>We should mention that, correspondingly, like what we do with the Fourier Transformation, we also have the inverse prosess of Laplace Transformation as:<br>$$<br>\begin{equation}<br>\mathscr{L}^{-1}\left(\mathscr{L}(f) \right)=f \label{eqinverse}<br>\end{equation}<br>$$<br>With equation \ref{eqf1} , \ref{eqf2} and \ref{eqinverse}, we could reduce the partial-differential equation to the total-differential equation.</p>
+<h3 id="3-3-An-example-of-utilization-of-Laplace-Transformation"><a href="#3-3-An-example-of-utilization-of-Laplace-Transformation" class="headerlink" title="3.3 An example of utilization of Laplace Transformation"></a>3.3 An example of utilization of Laplace Transformation</h3><p>We will take the heat conduction as the example to show the effect of Laplace transformation, in which we have differential equation of temperature distribution $T\left(x,\tau\right)$:<br>$$<br>\begin{equation}<br>\frac{\delta^{2}T}{\delta x^{2}}=\frac{1}{\alpha}\frac{\delta T}{\delta \tau} \label{eq17}<br>\end{equation}<br>$$<br>Where $\; x\;$ is the spatial variable and $\; \tau \;$ is variable in time domain. Applying Laplace Transformation on both side with respect to $\; \tau \;$:<br>$$<br>\begin{equation}<br>\int_{0}^{\infty}e^{-s\tau}\frac{\delta^2T}{\delta x^2}d\tau = \frac{1}{\alpha}\int_{0}^{\infty}e^{-s\tau}\frac{\delta T}{\delta \tau}d\tau  \label{eq18}<br>\end{equation}<br>$$<br>Casues the intergration on the left sides are completely independent with variable $\; x\;$, we could rearrange equation \ref{eq18} as:<br>$$<br>\begin{equation}<br>\frac{\delta^2}{\delta x^2}\int_{0}^{\infty}e^{-s\tau}T(x,\tau)d\tau=\frac{1}{\alpha}\int_{0}^{\infty}e^{-s\tau}\frac{\delta T}{\tau}d\tau \label{eq19}<br>\end{equation}<br>$$<br>Now let’s we substitute equation \ref{eqf1} and \ref{eqf2} to equation \ref{eq19}, we can get:<br>$$<br>\begin{equation}<br>\frac{\delta^2 \mathscr{L}(T)}{\delta x^2}-\frac{s}{\alpha}\mathscr{L}(T)=\frac{T}{\alpha}\vert_{\tau=0} \label{eq20}<br>\end{equation}<br>$$</p>
+<p>Through equation \ref{eq20}, we can say, we have rewrite the partial-differential equation with a total-differential one which are easy to prosess. The next and final thing we need to do is solving the experssion of $\; \mathscr{L}(T)\;$ and then use the inverse transformation to get $\; T(x,\tau)\;$.</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhenyuwei99.github.io/blogt.html" rel="next" title="一份关于个人博客搭建的小白分享 || 环境搭建">
+                <i class="fa fa-chevron-left"></i> 一份关于个人博客搭建的小白分享 || 环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/zhenyuwei99.github.io/images/MW3.png" alt="ZhenyuWei">
+            
+              <p class="site-author-name" itemprop="name">ZhenyuWei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/zhenyuwei99.github.io/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/zhenyuwei99.github.io/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/zhenyuwei99.github.io/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poZW55dXdlaTk5" title="GitHub &rarr; https://github.com/zhenyuwei99"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpoZW55dXdlaTk5QGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:zhenyuwei99@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aaGVueXVXZWky" title="Twitter &rarr; https://twitter.com/ZhenyuWei2"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="c2t5cGU6Wmhlbnl1V2VpP2NhbGx8Y2hhdA==" title="Skype &rarr; skype:ZhenyuWei?call|chat"><i class="fa fa-fw fa-skype"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/zhenyuwei99.github.io/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Fourier-Series"><span class="nav-text">1. Fourier Series</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Fourier-Therom"><span class="nav-text">1.1 Fourier Therom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Fourier-Coeffcients"><span class="nav-text">1.2 Fourier Coeffcients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Extension-of-interval"><span class="nav-text">1.3 Extension of interval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-A-simple-example"><span class="nav-text">1.4 A simple example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Application-of-solving-partial-differential-equation"><span class="nav-text">3.2 Application of solving partial-differential equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-An-example-of-utilization-of-Laplace-Transformation"><span class="nav-text">3.3 An example of utilization of Laplace Transformation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhenyuWei</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/zhenyuwei99.github.io/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/zhenyuwei99.github.io/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'Mye6xKp8m9FO7EqDi30Of6Vo-gzGzoHsz',
+    appKey: 'cqQsv3wCJDYLvSODE8bfhkNQ',
+    placeholder: '快来写出你莫名其妙的想法！！！',
+    avatar: 'monsterid',
+    meta: guest,
+    pageSize: '8' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/js.cookie.js?v=6.7.0"></script>
+  <script src="/zhenyuwei99.github.io/js/src/scroll-cookie.js?v=6.7.0"></script>
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>
