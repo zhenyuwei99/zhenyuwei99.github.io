@@ -159,7 +159,7 @@
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/eulerformula/shi.png">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/eulerformula/zengzhang.png">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/eulerformula/yuan.png">
-<meta property="og:updated_time" content="2019-06-10T15:32:50.120Z">
+<meta property="og:updated_time" content="2019-06-11T15:46:44.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Extremely Beautiful Formula --- Euler Formula">
 <meta name="twitter:description" content="This article is based on the curiosity, puerly, of mine as most of things I can find on the textbooks are just the vertification instead of the demonstration of Euler Formula. In this article, I will">
@@ -460,12 +460,24 @@
                 
               
 
-              <time title="Created: 2019-06-10 21:52:02 / Modified: 23:32:50" itemprop="dateCreated datePublished" datetime="2019-06-10T21:52:02+08:00">2019-06-10</time>
+              <time title="Created: 2019-06-10 21:52:02" itemprop="dateCreated datePublished" datetime="2019-06-10T21:52:02+08:00">2019-06-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-11 23:46:44" itemprop="dateModified" datetime="2019-06-11T23:46:44+08:00">2019-06-11</time>
               
             
           </span>
@@ -539,14 +551,38 @@
 
       
         <h2 id="1-Appreciating-the-Euler-Formula"><a href="#1-Appreciating-the-Euler-Formula" class="headerlink" title="1. Appreciating the Euler Formula"></a>1. Appreciating the Euler Formula</h2><p>Before we start the tedious mathmatical demonstration, let’s enjoy and analysis the Euler foumular intuitively for the first time. Here are the normal expression of the Euler Formula:</p>
-<p>$$<br>\begin{equation}<br>e^{ix}=cos\left(x\right)+isin\left(x\right) \label{base}<br>\end{equation}<br>$$</p>
-<p>Why we say this formula is so perfect? We can see that $i$, $e$ and trigonometric functions, all of which are so important no matter for the mathematicians of the physicist, are intergrated in such a brief formula.</p>
+<p>$$<br>\begin{equation}<br>e^{ix}=cos\left(x\right)+isin\left(x\right) \label{eqbase}<br>\end{equation}<br>$$</p>
+<p>Why we say this formula is so perfect? We can see that <strong>$i$, $e$ and trigonometric functions</strong>, all of which are so important no matter for the mathematicians or the physicists, are intergrated in such a brief formula.</p>
 <h2 id="2-Demonstration-of-Euler-Formula"><a href="#2-Demonstration-of-Euler-Formula" class="headerlink" title="2. Demonstration of Euler Formula"></a>2. Demonstration of Euler Formula</h2><p>Maybe most of readers will think that the only thing we need to do is expanding both sides of the formula with Taylor Expansion. However, this method is actually vertification as I talked in the discription. In this section we will discuss it in a much more direct way.</p>
 <h3 id="2-1-The-right-side-of-formula"><a href="#2-1-The-right-side-of-formula" class="headerlink" title="2.1 The right side of formula"></a>2.1 The right side of formula</h3><p>From the following figure with an unit circle in the coordinate system of real and imaginary axis, we can find the graphical meaning of the right side of the formular if we take $x$ as the rotating angle.</p>
 <div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/eulerformula/shi.png" title="[Unit Circle in Coordinate of Im and Re]"><br></div>
 
 <p>In this aspect, we could say that the right side of formular could actually represent the <strong>coordinate of any points on the unit circle</strong>. It mean that if we could demonstrate the left side, $e^{ix}$, could also discribe the track of the point on the unit circle, the demonstration will be finished.</p>
-<h3 id="2-2-What-dose-e-ix-mean"><a href="#2-2-What-dose-e-ix-mean" class="headerlink" title="2.2 What dose $e^{ix}$ mean?"></a>2.2 What dose $e^{ix}$ mean?</h3><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/eulerformula/zengzhang.png" title="[Unit Circle in Coordinate of Im and Re]"><br></div><br><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/eulerformula/yuan.png" title="[Unit Circle in Coordinate of Im and Re]"><br></div>
+<h3 id="2-2-What-dose-e-ix-mean"><a href="#2-2-What-dose-e-ix-mean" class="headerlink" title="2.2 What dose $e^{ix}$ mean?"></a>2.2 What dose $e^{ix}$ mean?</h3><p>As we all know, the idea of $e$ is actually came from a financial problem— the interest of deposit with differnt settlement interval:<br>$$<br>\begin{equation}<br>e=\lim_{n\to \infty}\left(1+\frac{1}{n} \right)^{n} \label{eqe}<br>\end{equation}<br>$$<br>To be more specific, taking $\; 5^{6}\;$, which equals to $\; e^{ln5\times 6}\;$, as example. The transformation actually tell us that the most money we could get with the  annual interest rate of $ln(5)$ in six years is $\; 5^6\;$. So lets write equation \ref{eqe} in a more pervasive way as:<br>$$<br>\begin{equation}<br>Q=e^{\ rate\ \times \ interval} \label{eqem}<br>\end{equation}<br>$$<br>From equation \ref{eqem} we can know that the effect of $\; e^{ax}\;$ could be reflect with the growth of length of line on the real axis. <strong>What will happen, however, when the rate becomes an imaginary number?</strong></p>
+<p><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/eulerformula/zengzhang.png" title="[Unit Circle in Coordinate of Im and Re]"><br></div><br>As mentioned before, the effect of $\; e^{\ rate\ \times interval}\;$ is pulling line in the real axis. So let’s draw our attention to the complex plane insteat of 2 dimensions axis. The answer of the question is shown in the picture, imaginary growth will pull line in the normal direction.</p>
+<p><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/eulerformula/yuan.png" title="[Unit Circle in Coordinate of Im and Re]"><br></div><br>Obviously, the bigger n is, the smoother curve we will get. <strong>And finally $\; n \to \infty \;$, we will get an perfect arc</strong>. It seems that we are very close to the result. To be honest, the demonstration, however, is too arbitary and intuitive without some <strong>analytic proof</strong>.<br>Now let’s have a look at the following limitation:<br>$$<br>\begin{equation}<br>e^{i}=\lim_{n\to \infty}\left(1+\frac{i}{n} \right)^{n}<br>\end{equation}<br>$$<br>While $\; n=1\;$, we could get:</p>
+<ul>
+<li>Result: $\; 1+i\;$</li>
+<li>Length: $\; \sqrt{1^2+1^2}\;$</li>
+<li>Growth of length: $\; \sqrt{2}-1\;$</li>
+<li>Rotating angle: $\;arctan\left( \frac{1}{1}\right)\;$</li>
+</ul>
+<p>While $\; n=2\;$, we could get:</p>
+<ul>
+<li>Result: $\; \left(1+\frac{i}{2}\right)^2=\frac{3}{4}+i\;$</li>
+<li>Length: $\; \left(\sqrt{1^2+\left(\frac{1}{4}\right)^2}\right)^2\;$</li>
+<li>Growth of length: $\; \frac{5}{4}-1\;$</li>
+<li>Rotating angle: $\; 2\times arctan\left( \frac{1}{2}\right)\;$</li>
+</ul>
+<p>While $\; n\to \infty \;$, we could get:</p>
+<ul>
+<li>Result: $\; e^{i} \;$</li>
+<li>Length: $\;\lim_{n\to \infty}\left(\sqrt{1^2+\left(\frac{1}{n}\right)^2}\right)^{n}=\lim_{n\to \infty}\left( 1+\frac{1}{n^2}\right)^{n^2\frac{1}{2n}}=\lim_{n\to \infty}e^{\frac{1}{2n}}=1 \;$</li>
+<li>Growth of length: $\; 0\;$</li>
+<li>Rotating angle: $\; \lim_{n \to \infty}n\times arctan\left( \frac{1}{n}\right)=1\;$</li>
+</ul>
+<p>With the tedious calculation <strong>we could find that the result of $\; e^{i} \;$ is rotate the unit line with 1 radian without changing the length</strong>. Take steps along these paths, we can say <strong>the effect of $\; e^{ix}\;$ is rotating the unit line with x radians</strong> which is in the same with what we have discussed in the <em>Section 2.1</em>.</p>
+<p>So far, we have finished the demonstration of the Euler Formula instead of just vertificate it without enjoying her beauty.</p>
 
       
     </div>
