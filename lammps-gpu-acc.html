@@ -148,15 +148,18 @@
 
 
 
-  <meta name="keywords" content="LAMMPS , GPU acclerated MD simulation">
+  <meta name="description" content="1. 显卡驱动安装安装CUDA之前首先需要确认一下GPU的驱动安装完成，首先用1$ nvidia-smi 命令确认一下，如果显示1$ nvidia-smi command not found 则需要自己安装GPU驱动。网上很多教程推荐使用12ubuntu-drivers devices   # 查询所有ubuntu推荐的驱动sudo ubuntu-drivers autoinstall 但是不知道">
+<meta name="keywords" content="LAMMPS , GPU acclerated MD simulation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lammps实现GPU加速">
 <meta property="og:url" content="https://madwayne.com/lammps-gpu-acc.html">
 <meta property="og:site_name" content="Mad   Wayne">
+<meta property="og:description" content="1. 显卡驱动安装安装CUDA之前首先需要确认一下GPU的驱动安装完成，首先用1$ nvidia-smi 命令确认一下，如果显示1$ nvidia-smi command not found 则需要自己安装GPU驱动。网上很多教程推荐使用12ubuntu-drivers devices   # 查询所有ubuntu推荐的驱动sudo ubuntu-drivers autoinstall 但是不知道">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-07T08:43:27.147Z">
+<meta property="og:updated_time" content="2019-10-07T10:45:02.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lammps实现GPU加速">
+<meta name="twitter:description" content="1. 显卡驱动安装安装CUDA之前首先需要确认一下GPU的驱动安装完成，首先用1$ nvidia-smi 命令确认一下，如果显示1$ nvidia-smi command not found 则需要自己安装GPU驱动。网上很多教程推荐使用12ubuntu-drivers devices   # 查询所有ubuntu推荐的驱动sudo ubuntu-drivers autoinstall 但是不知道">
 
 
 
@@ -453,7 +456,7 @@
                 
               
 
-              <time title="Created: 2019-10-07 16:40:17 / Modified: 16:43:27" itemprop="dateCreated datePublished" datetime="2019-10-07T16:40:17+08:00">2019-10-07</time>
+              <time title="Created: 2019-10-07 16:40:17 / Modified: 18:45:02" itemprop="dateCreated datePublished" datetime="2019-10-07T16:40:17+08:00">2019-10-07</time>
             
 
             
@@ -513,7 +516,7 @@
           
             <span class="post-meta-divider">|</span>
             <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
+            <i class="fa fa-"></i>
              Views:  
             <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
             </span>
@@ -536,7 +539,45 @@
       
 
       
-        
+        <h1 id="1-显卡驱动安装"><a href="#1-显卡驱动安装" class="headerlink" title="1. 显卡驱动安装"></a>1. 显卡驱动安装</h1><p>安装CUDA之前首先需要确认一下GPU的驱动安装完成，首先用<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>nvidia-smi</span><br></pre></td></tr></table></figure></p>
+<p>命令确认一下，如果显示<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvidia-smi <span class="keyword">command</span> <span class="keyword">not</span> found</span><br></pre></td></tr></table></figure></p>
+<p>则需要自己安装GPU驱动。网上很多教程推荐使用<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers devices   <span class="meta"># 查询所有ubuntu推荐的驱动</span></span><br><span class="line">sudo ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure></p>
+<p>但是不知道为什么我用这个方法没有成功，所以这里介绍另一种方法，利用runfile安装。</p>
+<h2 id="1-1卸载可能之前安装的驱动："><a href="#1-1卸载可能之前安装的驱动：" class="headerlink" title="1.1卸载可能之前安装的驱动："></a>1.1卸载可能之前安装的驱动：</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> --purge nvidia*</span><br></pre></td></tr></table></figure>
+<p>首先先卸载之前可能利用apt-get安装的驱动</p>
+<h2 id="1-2-禁用nouveau-driver"><a href="#1-2-禁用nouveau-driver" class="headerlink" title="1.2. 禁用nouveau driver"></a>1.2. 禁用nouveau driver</h2><p>Nouveau是由第三方为NVIDIA显卡开发的一个开源3D驱动，也没能得到NVIDIA的认可与支持。所以安装Nvidia自家的driver之前需要将这个driver禁用。<br>首先<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="keyword">vi</span> /etc/modprobe.d/blacklist.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>在最后添加<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau <span class="attribute">modeset</span>=0</span><br></pre></td></tr></table></figure></p>
+<p>添加后输入<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo update-initramfs -u</span><br><span class="line"><span class="variable">$ </span>sudo reboot</span><br></pre></td></tr></table></figure></p>
+<p>reboot之后输入<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod <span class="string">| grep nouveau</span></span><br></pre></td></tr></table></figure></p>
+<p>如果没有输出代禁用成功。</p>
+<h2 id="1-2-下载-Nvidia-驱动"><a href="#1-2-下载-Nvidia-驱动" class="headerlink" title="1.2 下载 Nvidia 驱动"></a>1.2 下载 Nvidia 驱动</h2><p>直接<span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9Eb3dubG9hZC9pbmRleC5hc3B4" title="https://www.nvidia.com/Download/index.aspx">Nvidia官网<i class="fa fa-external-link"></i></span>查询适合自己GPU的驱动下载。</p>
+<h2 id="1-3-命令行下安装-Nvidia-驱动"><a href="#1-3-命令行下安装-Nvidia-驱动" class="headerlink" title="1.3 命令行下安装 Nvidia 驱动"></a>1.3 命令行下安装 Nvidia 驱动</h2><p>首先Ctrl➕Alt➕F1切换至命令行模式，如果没有反应参考下文看一下 lightdm 是否安装。</p>
+<p>注意Nvidia驱动安装前需要用下列命令关闭X window，<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="built_in"> service </span>lightdm stop</span><br></pre></td></tr></table></figure></p>
+<p>如果出现<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unit</span> lightdm.service <span class="keyword">not</span> loaded</span><br></pre></td></tr></table></figure></p>
+<p>先执行<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> lightdm</span><br></pre></td></tr></table></figure></p>
+<p>安装完之后在出现的 configuration 界面选择lightdm。<br>关闭X window后，cd到runfile所在的folder，一般命令为：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> Downloads</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo sh NVIDIA...驱动名</span></span><br></pre></td></tr></table></figure></p>
+<p>安装开始之后一直 accept yes即可。<br>安装完成后重启X window<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo<span class="built_in"> service </span>lightdm start</span><br></pre></td></tr></table></figure></p>
+<p>Ctrl➕Alt➕F7 切回GUI模式。之后执行命令<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>nvidia-smi</span><br></pre></td></tr></table></figure></p>
+<p>如果输出成功代表 driver 安装完成。</p>
+<h1 id="2-CUDA-Toolkit-安装"><a href="#2-CUDA-Toolkit-安装" class="headerlink" title="2. CUDA Toolkit 安装"></a>2. CUDA Toolkit 安装</h1><p>首先<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlhLmNvbS9jdWRhLWRvd25sb2Fkcw==" title="https://developer.nvidia.com/cuda-downloads">Nvidia官网<i class="fa fa-external-link"></i></span>选择对应系统的安装包，这里建议直接选择本地安装的 runfile 文件。按照网站所提供的命令所执行即可。安装完成后执行<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo vi ~<span class="regexp">/.bashrc</span></span><br></pre></td></tr></table></figure></p>
+<p>在末尾添加<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:/usr/local/cuda-</span><span class="number">10.1</span>/bin</span><br></pre></td></tr></table></figure></p>
+<p>一开始我没有添加导致无法使用 <strong>nvcc</strong> 这个 command。 之后执行<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>nvcc -v</span><br></pre></td></tr></table></figure></p>
+<p>如果输出正常，即代表安装成功。</p>
+<h1 id="3-LAMMPS-GPU-lib-和-package-安装"><a href="#3-LAMMPS-GPU-lib-和-package-安装" class="headerlink" title="3. LAMMPS GPU lib 和 package 安装"></a>3. LAMMPS GPU lib 和 package 安装</h1><h2 id="3-1-GPU-lib-安装"><a href="#3-1-GPU-lib-安装" class="headerlink" title="3.1. GPU lib 安装"></a>3.1. GPU lib 安装</h2><p>这里我使用了make安装，cmake的安装<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC81NjM1MzAyNA==" title="https://zhuanlan.zhihu.com/p/56353024">知乎上的一个帖子写的很详细<i class="fa fa-external-link"></i></span>，同时附上<span class="exturl" data-url="aHR0cHM6Ly9sYW1tcHMuc2FuZGlhLmdvdi9kb2MvU3BlZWRfZ3B1Lmh0bWw=" title="https://lammps.sandia.gov/doc/Speed_gpu.html">官方Manual<i class="fa fa-external-link"></i></span>。<br>首先执行<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd lammps/<span class="class"><span class="keyword">lib</span>/<span class="title">gpu</span></span></span><br><span class="line">$ gedit Makefile.linux</span><br></pre></td></tr></table></figure></p>
+<p>这个文件中需要更改的主要有：</p>
+<ol>
+<li>CUDA_HOME:我这里CUDA_HOME 的地址其实是 <strong>/usr/local/cuda-10.1</strong></li>
+<li>CUDA_ARCH:这里不同的数字对应不同的GPU架构，具体对应可以在<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQ1VEQSNHUFVzX3N1cHBvcnRlZA==" title="https://en.wikipedia.org/wiki/CUDA#GPUs_supported">Wiki<i class="fa fa-external-link"></i></span>上找到。之后消除对应的架构之前的 <strong>#</strong> 即可。</li>
+<li>CUDA——PRECISION:这里代表GPU计算过程中的精度，我填的是 <strong>-D_SINGLE_SINGLE</strong>。<br>更改完之后执行<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>make -f Makefile.linux</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果之后更改Makefile.linux 中的内容之后需要重新编译需要先 <strong>make clean</strong> 如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -f Makefile<span class="selector-class">.linux</span> clean</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-2-GPU-package安装"><a href="#3-2-GPU-package安装" class="headerlink" title="3.2. GPU package安装"></a>3.2. GPU package安装</h2><p>首先执行<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> cd lammps/src</span><br><span class="line"><span class="symbol">$</span> make <span class="keyword">yes</span>-gpu</span><br><span class="line">Installing package gpu</span><br><span class="line"><span class="symbol">$</span> make mpi</span><br></pre></td></tr></table></figure></p>
+<p>建议之前如果编译过先在 <strong>src</strong> 下执行<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">make</span> clean-<span class="keyword">all</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h1><p>编译完成之后在 <strong>example</strong> 文件夹内随便找一个example测试一下，我这里选的是 <strong>DIFFUSE</strong> 进行测试。 GPU加速的LAMMPS的指令同样是基于 <strong>lmp_mpi</strong> 不过多了两个参数，对比如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mpirun -np <span class="number">4</span> lmp_mpi -<span class="keyword">in</span> <span class="keyword">in</span><span class="selector-class">.msd</span>.<span class="number">2</span>d   无GPU</span><br><span class="line">$ mpirun -np <span class="number">4</span> lmp_mpi -sf gpu -pk gpu <span class="number">1</span> -<span class="keyword">in</span> <span class="keyword">in</span><span class="selector-class">.msd</span>.<span class="number">2</span>d 有GPU</span><br></pre></td></tr></table></figure></p>
+<p>其中 <strong>-np 4</strong> 代表使用4个线程，而不是使用cpu的核数。而 <strong>-pk gpu 1</strong> 则代表使用1块gpu。如果无错误报出即代表编译成功。同时执行<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>watch -n <span class="number">1</span> nvidia-offsetMin</span><br></pre></td></tr></table></figure></p>
+<p>就可以看到 <strong>lmp_mpi</strong> 的任务。</p>
+
       
     </div>
 
@@ -655,8 +696,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -820,6 +870,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-显卡驱动安装"><span class="nav-text">1. 显卡驱动安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1卸载可能之前安装的驱动："><span class="nav-text">1.1卸载可能之前安装的驱动：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-禁用nouveau-driver"><span class="nav-text">1.2. 禁用nouveau driver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-下载-Nvidia-驱动"><span class="nav-text">1.2 下载 Nvidia 驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-命令行下安装-Nvidia-驱动"><span class="nav-text">1.3 命令行下安装 Nvidia 驱动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-CUDA-Toolkit-安装"><span class="nav-text">2. CUDA Toolkit 安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-LAMMPS-GPU-lib-和-package-安装"><span class="nav-text">3. LAMMPS GPU lib 和 package 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-GPU-lib-安装"><span class="nav-text">3.1. GPU lib 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-GPU-package安装"><span class="nav-text">3.2. GPU package安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-测试"><span class="nav-text">4. 测试</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
         <div class="back-to-top">
@@ -875,7 +942,7 @@
 
   
     <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-"></i>
     </span>
     <span class="site-uv" title="Total Visitors">
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
@@ -888,7 +955,7 @@
 
   
     <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
+      <i class="fa fa-"></i>
     </span>
     <span class="site-pv" title="Total Views">
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
