@@ -156,7 +156,7 @@
 <meta property="og:site_name" content="Mad   Wayne">
 <meta property="og:description" content="本文介绍了从Linux下安装GPU驱动以及CUDA toolkit的详细过程，同时包括了如何编译lammps下gpu的lib以及package，最后实现GPU加速的MD simulation。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-07T10:48:27.986Z">
+<meta property="og:updated_time" content="2019-10-08T09:04:19.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lammps实现GPU加速">
 <meta name="twitter:description" content="本文介绍了从Linux下安装GPU驱动以及CUDA toolkit的详细过程，同时包括了如何编译lammps下gpu的lib以及package，最后实现GPU加速的MD simulation。">
@@ -456,12 +456,24 @@
                 
               
 
-              <time title="Created: 2019-10-07 16:40:17 / Modified: 18:48:27" itemprop="dateCreated datePublished" datetime="2019-10-07T16:40:17+08:00">2019-10-07</time>
+              <time title="Created: 2019-10-07 16:40:17" itemprop="dateCreated datePublished" datetime="2019-10-07T16:40:17+08:00">2019-10-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-08 17:04:19" itemprop="dateModified" datetime="2019-10-08T17:04:19+08:00">2019-10-08</time>
               
             
           </span>
@@ -550,15 +562,15 @@
 <h2 id="1-2-禁用nouveau-driver"><a href="#1-2-禁用nouveau-driver" class="headerlink" title="1.2. 禁用nouveau driver"></a>1.2. 禁用nouveau driver</h2><p>Nouveau是由第三方为NVIDIA显卡开发的一个开源3D驱动，也没能得到NVIDIA的认可与支持。所以安装Nvidia自家的driver之前需要将这个driver禁用。<br>首先<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="keyword">vi</span> /etc/modprobe.d/blacklist.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
 <p>在最后添加<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau <span class="attribute">modeset</span>=0</span><br></pre></td></tr></table></figure></p>
 <p>添加后输入<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo update-initramfs -u</span><br><span class="line"><span class="variable">$ </span>sudo reboot</span><br></pre></td></tr></table></figure></p>
-<p>reboot之后输入<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod <span class="string">| grep nouveau</span></span><br></pre></td></tr></table></figure></p>
+<p>reboot之后输入<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lsmod <span class="string">| grep nouveau</span></span><br></pre></td></tr></table></figure></p>
 <p>如果没有输出代禁用成功。</p>
 <h2 id="1-2-下载-Nvidia-驱动"><a href="#1-2-下载-Nvidia-驱动" class="headerlink" title="1.2 下载 Nvidia 驱动"></a>1.2 下载 Nvidia 驱动</h2><p>直接<span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9Eb3dubG9hZC9pbmRleC5hc3B4" title="https://www.nvidia.com/Download/index.aspx">Nvidia官网<i class="fa fa-external-link"></i></span>查询适合自己GPU的驱动下载。</p>
 <h2 id="1-3-命令行下安装-Nvidia-驱动"><a href="#1-3-命令行下安装-Nvidia-驱动" class="headerlink" title="1.3 命令行下安装 Nvidia 驱动"></a>1.3 命令行下安装 Nvidia 驱动</h2><p>首先Ctrl➕Alt➕F1切换至命令行模式，如果没有反应参考下文看一下 lightdm 是否安装。</p>
 <p>注意Nvidia驱动安装前需要用下列命令关闭X window，<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="built_in"> service </span>lightdm stop</span><br></pre></td></tr></table></figure></p>
 <p>如果出现<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unit</span> lightdm.service <span class="keyword">not</span> loaded</span><br></pre></td></tr></table></figure></p>
-<p>先执行<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt <span class="keyword">install</span> lightdm</span><br></pre></td></tr></table></figure></p>
+<p>先执行<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt <span class="keyword">install</span> lightdm</span><br></pre></td></tr></table></figure></p>
 <p>安装完之后在出现的 configuration 界面选择lightdm。<br>关闭X window后，cd到runfile所在的folder，一般命令为：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> Downloads</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo sh NVIDIA...驱动名</span></span><br></pre></td></tr></table></figure></p>
-<p>安装开始之后一直 accept yes即可。<br>安装完成后重启X window<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo<span class="built_in"> service </span>lightdm start</span><br></pre></td></tr></table></figure></p>
+<p>安装开始之后一直 accept yes即可。<br>安装完成后重启X window<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="built_in"> service </span>lightdm start</span><br></pre></td></tr></table></figure></p>
 <p>Ctrl➕Alt➕F7 切回GUI模式。之后执行命令<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>nvidia-smi</span><br></pre></td></tr></table></figure></p>
 <p>如果输出成功代表 driver 安装完成。</p>
 <h1 id="2-CUDA-Toolkit-安装"><a href="#2-CUDA-Toolkit-安装" class="headerlink" title="2. CUDA Toolkit 安装"></a>2. CUDA Toolkit 安装</h1><p>首先<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlhLmNvbS9jdWRhLWRvd25sb2Fkcw==" title="https://developer.nvidia.com/cuda-downloads">Nvidia官网<i class="fa fa-external-link"></i></span>选择对应系统的安装包，这里建议直接选择本地安装的 runfile 文件。按照网站所提供的命令所执行即可。安装完成后执行<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo vi ~<span class="regexp">/.bashrc</span></span><br></pre></td></tr></table></figure></p>
@@ -570,7 +582,7 @@
 <ol>
 <li>CUDA_HOME:我这里CUDA_HOME 的地址其实是 <strong>/usr/local/cuda-10.1</strong></li>
 <li>CUDA_ARCH:这里不同的数字对应不同的GPU架构，具体对应可以在<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQ1VEQSNHUFVzX3N1cHBvcnRlZA==" title="https://en.wikipedia.org/wiki/CUDA#GPUs_supported">Wiki<i class="fa fa-external-link"></i></span>上找到。之后消除对应的架构之前的 <strong>#</strong> 即可。</li>
-<li>CUDA——PRECISION:这里代表GPU计算过程中的精度，我填的是 <strong>-D_SINGLE_SINGLE</strong>。<br>更改完之后执行<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>make -f Makefile.linux</span><br></pre></td></tr></table></figure>
+<li>CUDA_PRECISION:这里代表GPU计算过程中的精度，我填的是 <strong>-D_SINGLE_SINGLE</strong>。<br>更改完之后执行<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>make -f Makefile.linux</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>如果之后更改Makefile.linux 中的内容之后需要重新编译需要先 <strong>make clean</strong> 如下<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make -f Makefile<span class="selector-class">.linux</span> clean</span><br></pre></td></tr></table></figure></p>
