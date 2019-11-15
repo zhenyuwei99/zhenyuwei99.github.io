@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Major Mono Display:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhenyuwei99.github.io/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","width":280,"display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="This article will introduce how to calculate diffusion coefficients, a basic property which is usually used to judge performance of a model, through Einstein relationship. Matlab script will be attach">
+<meta name="keywords" content="Diffusion coefficients, MD simulation, Matlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Calculate Diffusion Coefficients in MD Simulation">
+<meta property="og:url" content="https://madwayne.com/md-diffusion.html">
+<meta property="og:site_name" content="Mad   Wayne">
+<meta property="og:description" content="This article will introduce how to calculate diffusion coefficients, a basic property which is usually used to judge performance of a model, through Einstein relationship. Matlab script will be attach">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/md-diffusion/all.png">
+<meta property="og:updated_time" content="2019-11-15T06:53:46.542Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Calculate Diffusion Coefficients in MD Simulation">
+<meta name="twitter:description" content="This article will introduce how to calculate diffusion coefficients, a basic property which is usually used to judge performance of a model, through Einstein relationship. Matlab script will be attach">
+<meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/md-diffusion/all.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://madwayne.com/md-diffusion.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>How to Calculate Diffusion Coefficients in MD Simulation | Mad   Wayne</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhenyuwei99.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mad   Wayne</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">一个闲的无聊的SB写的Blog。ME专业本科生，喜爱各类难搞话题以及各种无聊笑话,如果你很无聊或者你很难搞请马上email联系我。</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madwayne.com/zhenyuwei99.github.io/md-diffusion.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhenyuWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/zhenyuwei99.github.io/images/MW3.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mad   Wayne">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">How to Calculate Diffusion Coefficients in MD Simulation
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-14 01:07:14" itemprop="dateCreated datePublished" datetime="2019-11-14T01:07:14+08:00">2019-11-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-15 14:53:46" itemprop="dateModified" datetime="2019-11-15T14:53:46+08:00">2019-11-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/zhenyuwei99.github.io/categories/MD-simulation/" itemprop="url" rel="index"><span itemprop="name">MD simulation</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/zhenyuwei99.github.io/md-diffusion.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/zhenyuwei99.github.io/md-diffusion.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-description">This article will introduce how to calculate diffusion coefficients, a basic property which is usually used to judge performance of a model, through Einstein relationship. Matlab script will be attached.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Einstein-relationship"><a href="#1-Einstein-relationship" class="headerlink" title="1. Einstein relationship"></a>1. Einstein relationship</h1><h2 id="1-1-Diffusion-equation"><a href="#1-1-Diffusion-equation" class="headerlink" title="1.1. Diffusion equation"></a>1.1. Diffusion equation</h2><p>Two important laws need to be introduced to help us understand the motion of liquid.</p>
+<p>Mass conservation law:<br>$$<br>\begin{equation}<br>\frac{\partial}{\partial t}C(\textbf{r},t) = - \frac{\partial}{\partial \textbf{r}}J(\textbf{r},t)<br>\label{equation_massconservation}<br>\end{equation}<br>$$</p>
+<p>Fick’s law:</p>
+<p>$$<br>\begin{equation}<br>J(\textbf{r},t) = -D \frac{\partial}{\partial \textbf{r}} C(\textbf{r},t)<br>\label{equation_ficklaw}<br>\end{equation}<br>$$</p>
+<p>$C$ and $J$ are concentration and flux of liquid atoms respectively. Equation (\ref{equation_massconservation}) shows that flux will point from high concentration area to low concentration area. Equation (\ref{equation_ficklaw}) uses $D$, diffusion coefficient, to describe the relationship between $C$ and $J$. Substituting Equation (\ref{equation_ficklaw}) into Equation (\ref{equation_massconservation}), we obtain diffusion equation:</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial}{\partial t} C = D\left(\frac{\partial ^2 C}{\partial x^2} + \frac{\partial ^2 C}{\partial y^2} +\frac{\partial ^2 C}{\partial z^2}\right)<br>    \label{equation_diffuison}<br>\end{equation}<br>$$</p>
+<h2 id="1-2-Random-walk-model"><a href="#1-2-Random-walk-model" class="headerlink" title="1.2. Random walk model"></a>1.2. Random walk model</h2><p>To simplify question, discussion will be limited in 2D random walk model defined as below:</p>
+<p>$$<br>\begin{equation}<br>    x(t+\tau)=\left\{<br>             \begin{array}{lr}<br>             x(t) + a, P = \frac{1}{2}&amp;  \\<br>             x(t) - a, P = \frac{1}{2} &amp;<br>             \end{array}<br>\right.<br>\label{equarion_randomrule}<br>\end{equation}<br>$$</p>
+<p>In random walk, particles can only move left or right in specific length $a$ after specific time interval $\tau$ with the same probability.</p>
+<div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/md-diffusion/all.png" title="[Graphic Fourier Series]"><br></div>
+
+<p>A illustration of 2D random walk model is shown above. Through the definition of random walk model, we obtain:</p>
+<p>$$<br>\begin{equation}<br>    J\left( x \right) = \frac{\frac{1}{2} N\left(x-\frac{a}{2}\right)-\frac{1}{2} N\left(x+\frac{a}{2}\right)}{\tau}<br>    \label{equation_flux}<br>\end{equation}<br>$$</p>
+<p>$$<br>\begin{equation}<br>C(x) = \frac{N_x}{2*\frac{a}{2}}<br>\end{equation}<br>$$</p>
+<p>When $a$, $\tau \to 0$, Equation (\ref{equation_flux}) can be transformed to:</p>
+<p>$$<br>\begin{equation}<br>    J(x) = \frac{a^2}{2\tau} \frac{C\left(x-\frac{a}{2}\right)-C\left(x+\frac{a}{2}\right)}{a} = -\frac{a^2}{2\tau}\frac{\partial}{\partial x}C<br>    \label{equation_randomJ}<br>\end{equation}<br>$$</p>
+<p>Through Equation (\ref{equation_ficklaw}), we obtain:</p>
+<p>$$<br>\begin{equation}<br>D = \frac{a^2}{2\tau}<br>\end{equation}<br>$$</p>
+<p>Obviously, we have got the explicit expression of diffusion coefficients. Current question is how to quantize $a$ and $\tau$, two infinitesimaali.</p>
+<p>Assuming $l_i$ represent the direction of motion in step $i = \frac{t}{\tau}$ (1 = right, -1 = left), we obtain:</p>
+<p>$$<br>\begin{equation}<br>    x(t) = x(0) + \sum_{i=1}^{t/\tau}l_i<br>    \label{equation_xtau}<br>\end{equation}<br>$$</p>
+<p>Through Equation (\ref{equation_xtau}), we could get variance of $x(t)$:<br>$$<br>\begin{equation}<br>         \left \langle (x(t)-x(0))^2 \right \rangle = \sum_{i}\langle l_i^2\rangle+\sum_{i \neq j} \langle l_i \rangle \langle l_j \rangle =  \sum_i\left(\frac{1}{2}(a)^2 + \frac{1}{2}(-a)^2\right) = \frac{t}{\tau}a^2<br>        \label{equation_variance}<br>\end{equation}<br>$$</p>
+<p>The second summation in Equation (\ref{equation_variance}) vanishes as we assume each steps are independent. Combining Equation (\ref{equation_diffuison}) and (\ref{equation_variance}) we could obtain:<br>$$<br>\begin{equation}<br>    \left\langle (x(t)-x(0))^2 \right\rangle = 2d\frac{a^2}{2d\tau}t=2d D t<br>    \label{equation_calculation_2d}<br>\end{equation}<br>$$<br>And Equation (\ref{equation_calculation_2d}) could be expanded to d-D cases easily as below:<br>$$<br>\begin{equation}<br>    \left\langle (\textbf{r}(t)-\textbf{r}(0))^2 \right\rangle = 2d\frac{a^2}{2d\tau}t=2d D t<br>    \label{equation_calculation}<br>\end{equation}<br>$$<br>Where $\textbf{r}$ is a d-D vector. The left term is mean square displacement, a easily obtained variable in MD simulation. Through Equation (\ref{equation_calculation}), we can obtain diffusion coefficients with the slope of MSD-t curve. This relationship was first established by Einstein in 1905 so called Einstein relationship.</p>
+<h1 id="2-Matlab-script"><a href="#2-Matlab-script" class="headerlink" title="2. Matlab script"></a>2. Matlab script</h1><h2 id="2-1-Reading-trajectory-files"><a href="#2-1-Reading-trajectory-files" class="headerlink" title="2.1. Reading trajectory files"></a>2.1. Reading trajectory files</h2><p>In LAMMPS, which is used to produce trajectory file in this article, Matlab functions can be found in LAMMPS folder.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lammps/tools/matlab</span><br></pre></td></tr></table></figure></p>
+<p>For netCDF format trajectory files, which are produced by AMBER and NAMD, Matlab has a set of functions to read data from it. Nctoolbox and introduction of it could be found <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25jdG9vbGJveC9uY3Rvb2xib3g=" title="https://github.com/nctoolbox/nctoolbox">here<i class="fa fa-external-link"></i></span></p>
+<p>Take LAMMPS output trajectory file as an example:<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">clear all</span><br><span class="line">clc</span><br><span class="line"></span><br><span class="line">data_raw                =   readdump_all(dumpfile_name);        <span class="comment">% Reading data in dump file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% Simulation variables</span></span><br><span class="line"></span><br><span class="line">pos_coord               =   <span class="number">3</span>;                                  <span class="comment">% Column of x in dump file;</span></span><br><span class="line">size_data               =   <span class="built_in">size</span>(data_raw.atom_data);                  </span><br><span class="line">num_atoms               =   size_data(<span class="number">1</span>);</span><br><span class="line">num_sim_steps           =   size_data(<span class="number">3</span>);</span><br><span class="line">num_dims                =   <span class="number">3</span>;</span><br><span class="line">size_coord              =   [num_atoms,num_dims,num_sim_steps];             </span><br><span class="line">coord_raw               =   <span class="built_in">zeros</span>(size_coord);                  <span class="comment">% Warped coordinates</span></span><br><span class="line">box_range               =   <span class="built_in">zeros</span>(num_dims,<span class="number">2</span>);</span><br><span class="line">box_range(<span class="number">1</span>,:)          =   <span class="built_in">mean</span>(data_raw.x_bound);</span><br><span class="line">box_range(<span class="number">2</span>,:)          =   <span class="built_in">mean</span>(data_raw.y_bound);</span><br><span class="line">box_range(<span class="number">3</span>,:)          =   <span class="built_in">mean</span>(data_raw.z_bound);</span><br><span class="line">box_size                =   box_range(:,<span class="number">2</span>) - box_range(:,<span class="number">1</span>);    <span class="comment">% 3-d vector of box size</span></span><br><span class="line">box_diag                =   <span class="built_in">diag</span>(box_size);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> step = <span class="number">1</span> : num_sim_steps  </span><br><span class="line">    data_raw.atom_data(:,:,step)     =   <span class="built_in">sortrows</span>(<span class="built_in">squeeze</span>(data_raw.atom_data(:,:,step)),<span class="number">1</span>);</span><br><span class="line">    coord_raw(:,:,step)              =   data_raw.atom_data(:,pos_coord:(pos_coord+num_dims<span class="number">-1</span>),step);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>Noting that the order of dump file in LAMMPS follows the coordinate instead of atoms’ ID. This is why row 20 is used to change squeeze to the second squeeze which is easier to deal.</p>
+<h2 id="2-2-Handling-PBC-issues"><a href="#2-2-Handling-PBC-issues" class="headerlink" title="2.2. Handling PBC issues"></a>2.2. Handling PBC issues</h2><p>When Periodic Boundary Condition (PBC) is used in MD simulation. We should take coordinate warp into consideration. The flowing Matlab command could be used:<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">coord_scl               =   <span class="built_in">zeros</span>(size_coord);                   <span class="comment">% scaled coordinate</span></span><br><span class="line">coord_scl_corr          =   <span class="built_in">zeros</span>(size_coord);                   <span class="comment">% difference of scaled coordinate between each dump step</span></span><br><span class="line">coord_corr              =   <span class="built_in">zeros</span>(size_coord);                   <span class="comment">% Corrected coordinates</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> step = <span class="number">1</span> : num_sim_steps</span><br><span class="line">    coord_scl = coord_raw(:,:,step) / box_diag;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">coord_coor(:,:,<span class="number">1</span>)       =   coord_raw(:,:,<span class="number">1</span>);                     <span class="comment">% Initial setting of corrected coordinates</span></span><br><span class="line">coord_scl_corr(:,:,<span class="number">1</span>)   =   coord_scl(:,:,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">coord_scl_diff          =   coord_scl(:,:,<span class="number">2</span>:num_sim_steps) - coord_scl(:,:,<span class="number">1</span>:num_sim_steps<span class="number">-1</span>);</span><br><span class="line">coord_scl_diff          =   coord_scl_diff - <span class="built_in">round</span>(coord_scl_diff);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> step = <span class="number">2</span> : num_sim_steps</span><br><span class="line">    coord_scl_corr(:,:,step) = coord_scl_corr(:,:,step<span class="number">-1</span>) + coord_scl_diff(:,:,step);</span><br><span class="line">    coord_coor               = coord_scl_coor(:,:,step) * box_diag;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-3-Calculation-of-MSD"><a href="#2-3-Calculation-of-MSD" class="headerlink" title="2.3. Calculation of MSD"></a>2.3. Calculation of MSD</h2><p>It worthy noting that the bracket in Equation (\ref{equation_calculation}) represent the ensemble average of variable inside it. So I prefer to transform Equation (\ref{equation_calculation}) into :</p>
+<p>$$<br>\begin{equation}<br>\left\langle(\textbf{r}(t_{MSD})-\textbf{r}(0))^2\right\rangle = \frac{1}{T_{sim}-t_{MSD}} \int_{t_{MSD}}^{T_{sim}}\left(\textbf{r}(t) - \textbf{r}(t-t_{MSD})\right)^2dt = 6Dt_{MSD}<br>\label{equation_MDcal}<br>\end{equation}<br>$$</p>
+<p>It is clear that $t_{MSD}$ should be much smaller than $t_sim$ to ensure the convergency of MSD. Usually I use relationship $T_{MSD} = \frac{1}{\alpha}T_{sim}$ to determine length of MSD calculating time. $\alpha = 10$ is recommended to optimize the usage of trajectory data while convergency is guaranteed.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">alpha                   =   <span class="number">10</span>;</span><br><span class="line">num_msd_steps           =   <span class="built_in">round</span>(num_sim_steps / alpha);</span><br><span class="line">msd                     =   <span class="built_in">zeros</span>([num_atoms,num_dims+<span class="number">1</span>,num_msd_steps]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> step = <span class="number">1</span> : num_msd_steps</span><br><span class="line">    <span class="keyword">for</span> dim = <span class="number">1</span> : num_dims</span><br><span class="line">        msd(:,dim,step) = <span class="built_in">mean</span>(<span class="built_in">squeeze</span>((coord_coor(:,dim,<span class="number">1</span>+step:num_sim_steps) ...</span><br><span class="line">                                      - coord_coor(:,dim,<span class="number">1</span>:num_sim_steps-step)).^<span class="number">2</span>),<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    msd(:,num_dims+<span class="number">1</span>,step) = sum(<span class="built_in">squeeze</span>(msd(:,<span class="number">1</span>:num_dims,step)),<span class="number">2</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-4-Diffusion-coefficients"><a href="#2-4-Diffusion-coefficients" class="headerlink" title="2.4. Diffusion coefficients"></a>2.4. Diffusion coefficients</h2><p>The last thing we need to do is to get the slope of MSD-t_msd curve with few lines of commands.<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">interval_sim            =   <span class="number">2</span>;                                    <span class="comment">% Time interval in simulation, 2fs here</span></span><br><span class="line">dump_freq               =   <span class="number">1000</span>;                                 <span class="comment">% Frequency of writing trajectory files</span></span><br><span class="line">interval_dump           =   t_step * dump_freq;                   <span class="comment">% Time interval in trajectory file</span></span><br><span class="line"></span><br><span class="line">diffusion_coef = msd(:,:,num_msd_steps) - msd(:,:,<span class="built_in">round</span>(num_msd_steps/<span class="number">2</span>)) ...</span><br><span class="line">              ./ ((num_msd_steps - <span class="built_in">round</span>(num_msd_steps/<span class="number">2</span>)) * t_dump);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/zhenyuwei99.github.io/lammps-gpu-acc.html" rel="bookmark">Lammps实现GPU加速</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhenyuwei99.github.io/tags/LAMMPS/" rel="tag"># LAMMPS</a>
+          
+            <a href="/zhenyuwei99.github.io/tags/Matlab/" rel="tag"># Matlab</a>
+          
+            <a href="/zhenyuwei99.github.io/tags/Einstein-relationship/" rel="tag"># Einstein relationship</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhenyuwei99.github.io/lammps-gpu-acc.html" rel="next" title="Lammps实现GPU加速">
+                <i class="fa fa-chevron-left"></i> Lammps实现GPU加速
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/zhenyuwei99.github.io/images/MW3.png" alt="ZhenyuWei">
+            
+              <p class="site-author-name" itemprop="name">ZhenyuWei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/zhenyuwei99.github.io/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/zhenyuwei99.github.io/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/zhenyuwei99.github.io/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poZW55dXdlaTk5" title="GitHub &rarr; https://github.com/zhenyuwei99"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpoZW55dXdlaTk5QGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:zhenyuwei99@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aaGVueXVXZWky" title="Twitter &rarr; https://twitter.com/ZhenyuWei2"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="c2t5cGU6Wmhlbnl1V2VpP2NhbGx8Y2hhdA==" title="Skype &rarr; skype:ZhenyuWei?call|chat"><i class="fa fa-fw fa-skype"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/zhenyuwei99.github.io/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Einstein-relationship"><span class="nav-text">1. Einstein relationship</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Diffusion-equation"><span class="nav-text">1.1. Diffusion equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Random-walk-model"><span class="nav-text">1.2. Random walk model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Matlab-script"><span class="nav-text">2. Matlab script</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Reading-trajectory-files"><span class="nav-text">2.1. Reading trajectory files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Handling-PBC-issues"><span class="nav-text">2.2. Handling PBC issues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Calculation-of-MSD"><span class="nav-text">2.3. Calculation of MSD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Diffusion-coefficients"><span class="nav-text">2.4. Diffusion coefficients</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhenyuWei</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">Total click: <span id="busuanzi_value_site_pv"></span></span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">Total vistors: <span id="busuanzi_value_site_uv"></span></span>
+    <span class="post-meta-divider">|</span>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/zhenyuwei99.github.io/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/zhenyuwei99.github.io/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'Mye6xKp8m9FO7EqDi30Of6Vo-gzGzoHsz',
+    appKey: 'cqQsv3wCJDYLvSODE8bfhkNQ',
+    placeholder: '快来写出你莫名其妙的想法！！！',
+    avatar: 'monsterid',
+    meta: guest,
+    pageSize: '8' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/js.cookie.js?v=6.7.0"></script>
+  <script src="/zhenyuwei99.github.io/js/src/scroll-cookie.js?v=6.7.0"></script>
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>
