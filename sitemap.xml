@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madwayne.com/lammps-gpu-acc.html</loc>
+    
+    <lastmod>2019-11-15T11:52:48.129Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madwayne.com/md-diffusion.html</loc>
     
     <lastmod>2019-11-15T11:17:34.746Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://madwayne.com/maxwelld.html</loc>
     
     <lastmod>2019-11-13T18:11:57.274Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madwayne.com/lammps-gpu-acc.html</loc>
-    
-    <lastmod>2019-10-08T09:05:29.247Z</lastmod>
     
   </url>
   
