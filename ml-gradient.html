@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Noto Sans TC:300,300italic,400,400italic,700,700italic|Major Mono Display:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/zhenyuwei99.github.io/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/zhenyuwei99.github.io/images/MW.png?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhenyuwei99.github.io/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","width":280,"display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
+<meta name="keywords" content="Machine Learning,Julia">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Leaning Note.1 &gt; Cost Function and Gradient Descent">
+<meta property="og:url" content="https://madwayne.com/ml-gradient.html">
+<meta property="og:site_name" content="Mad   Wayne">
+<meta property="og:description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg">
+<meta property="og:updated_time" content="2020-02-25T18:15:58.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine Leaning Note.1 &gt; Cost Function and Gradient Descent">
+<meta name="twitter:description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
+<meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://madwayne.com/ml-gradient.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Machine Leaning Note.1 > Cost Function and Gradient Descent | Mad   Wayne</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/zhenyuwei99.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mad   Wayne</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">一个闲的无聊的SB写的Blog。ME专业本科生，喜爱各类难搞话题以及各种无聊笑话,如果你很无聊或者你很难搞请马上email联系我。</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/zhenyuwei99.github.io/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://madwayne.com/zhenyuwei99.github.io/ml-gradient.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhenyuWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/zhenyuwei99.github.io/images/MW3.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mad   Wayne">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Machine Leaning Note.1 > Cost Function and Gradient Descent
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-02-26 02:15:58" itemprop="dateCreated datePublished" datetime="2020-02-26T02:15:58+08:00">2020-02-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/zhenyuwei99.github.io/categories/ML-Notes/" itemprop="url" rel="index"><span itemprop="name">ML Notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/zhenyuwei99.github.io/ml-gradient.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/zhenyuwei99.github.io/ml-gradient.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-description">This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient descent, will be introduced briefly, and an example will be shown.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="What-is-cost-function"><a href="#What-is-cost-function" class="headerlink" title="What is cost function?"></a>What is cost function?</h1><p>Let’s begin with an example. Here we have some raw data (red cross) shown in figure below.</p>
+<div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg" title="[Raw Data and Prediction]"><br></div>
+
+<p>These points could be describe well by a linear function, Eq.($\ref{equation_linear}$)</p>
+<p>$$<br>\begin{equation}<br>h_{\theta} = \theta_1 * x + \theta_0<br>\label{equation_linear}<br>\end{equation}<br>$$</p>
+<p>And obviously, the second line can describe raw data better than the first one. Question is how can we qunatify the performance of our model. Intuitively, we could define the summation of distance from raw data to prediction points which introduces the mean square error function shown below.</p>
+<p>$$<br>\begin{equation}<br>J_{\theta} = \frac{1}{2m} \sum_{i=1}^{m} \left( h_{\theta} - y \right) ^2<br>\label{equation_cost}<br>\end{equation}<br>$$</p>
+<p>In Eq.($\ref{equation_cost}$), $\textbf{m}$ is the number of data points, and $\textbf{2}$ in denominator exists only for convinience of gradient calculation. Substituing Eq.(\ref{equation_linear}) into Eq.(\ref{equation_cost}), we can get the cost function surface show below.</p>
+<div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg" title="[Cost Function Surface]"><br></div>
+
+<h1 id="What-is-gradient-descent"><a href="#What-is-gradient-descent" class="headerlink" title="What is gradient descent?"></a>What is gradient descent?</h1><p>Now we have the feature to quantify the performance of a So the only thing we need to do now is trying to find the minimum of cost function and corresponding coordinate $\theta_0$ and $\theta_1$. Imaging we are one a mountain, tring to get to valley as soon as possible. What will you do. <strong>You will look around, finding the steepest direction and walk backward.</strong> Mathmatically, the steepest direction can be described well by gradient, and finding valley behavior can be described by following equation.</p>
+<p>$$<br>\begin{equation}<br>\theta_i^{n+1} =  \theta_i^{n} - \alpha * \frac{\partial J_{\theta}}{\partial \theta_i}<br>\label{equation_gradient}<br>\end{equation}<br>$$</p>
+<p>In Eq.(\ref{equation_gradient}), <strong>$\alpha$</strong> represents your stride, called learning rate. Bigger $\alpha$ means you can get to the valley faster, lossing more scenery, information. So it’s a tricky job to balance the tradeoff between computaional time and accuarcy of model in most of Machine Learning (ML) questions.  <strong>–</strong> means you go toward the opposite direction of the steepest one instead off heading to mountaintop.</p>
+<h1 id="Why-gradient-descent-is-important"><a href="#Why-gradient-descent-is-important" class="headerlink" title="Why gradient descent is important?"></a>Why gradient descent is important?</h1><div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg" title="[Cost Function Surface]"><br></div>
+
+<p>Let’s go back to our first example, we can easily implement gradient descent algorithm to find the local minimum without to many iterations. Trajectory of $\vec\theta$ is shown in figure above. Although this alogorithm is easy, it is really robust and genrally used in ML fields.</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/zhenyuwei99.github.io/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/zhenyuwei99.github.io/tags/Julia/" rel="tag"># Julia</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/zhenyuwei99.github.io/born.html" rel="next" title="人生开始时的自由">
+                <i class="fa fa-chevron-left"></i> 人生开始时的自由
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/zhenyuwei99.github.io/images/MW3.png" alt="ZhenyuWei">
+            
+              <p class="site-author-name" itemprop="name">ZhenyuWei</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/zhenyuwei99.github.io/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/zhenyuwei99.github.io/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/zhenyuwei99.github.io/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poZW55dXdlaTk5" title="GitHub &rarr; https://github.com/zhenyuwei99"><i class="fa fa-fw fa-github"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpoZW55dXdlaTk5QGdtYWlsLmNvbQ==" title="E-Mail &rarr; mailto:zhenyuwei99@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aaGVueXVXZWky" title="Twitter &rarr; https://twitter.com/ZhenyuWei2"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="c2t5cGU6Wmhlbnl1V2VpP2NhbGx8Y2hhdA==" title="Skype &rarr; skype:ZhenyuWei?call|chat"><i class="fa fa-fw fa-skype"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/zhenyuwei99.github.io/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-cost-function"><span class="nav-text">What is cost function?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-gradient-descent"><span class="nav-text">What is gradient descent?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-gradient-descent-is-important"><span class="nav-text">Why gradient descent is important?</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhenyuWei</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">Total click: <span id="busuanzi_value_site_pv"></span></span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">Total vistors: <span id="busuanzi_value_site_uv"></span></span>
+    <span class="post-meta-divider">|</span>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/zhenyuwei99.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/zhenyuwei99.github.io/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/zhenyuwei99.github.io/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/zhenyuwei99.github.io/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: 'Mye6xKp8m9FO7EqDi30Of6Vo-gzGzoHsz',
+    appKey: 'cqQsv3wCJDYLvSODE8bfhkNQ',
+    placeholder: '快来写出你莫名其妙的想法！！！',
+    avatar: 'monsterid',
+    meta: guest,
+    pageSize: '8' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+  
+  <script src="/zhenyuwei99.github.io/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/js.cookie.js?v=6.7.0"></script>
+  <script src="/zhenyuwei99.github.io/js/src/scroll-cookie.js?v=6.7.0"></script>
+
+
+  
+  <script src="/zhenyuwei99.github.io/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>
