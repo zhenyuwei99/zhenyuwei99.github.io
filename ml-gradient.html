@@ -159,7 +159,7 @@
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg">
-<meta property="og:updated_time" content="2020-02-25T18:15:58.346Z">
+<meta property="og:updated_time" content="2020-02-26T02:32:05.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Machine Leaning Note.1 &gt; Cost Function and Gradient Descent">
 <meta name="twitter:description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
@@ -460,9 +460,13 @@
                 
               
 
-              <time title="Created: 2020-02-26 02:15:58" itemprop="dateCreated datePublished" datetime="2020-02-26T02:15:58+08:00">2020-02-26</time>
+              <time title="Created: 2020-02-26 02:15:58 / Modified: 10:32:05" itemprop="dateCreated datePublished" datetime="2020-02-26T02:15:58+08:00">2020-02-26</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -537,16 +541,20 @@
         <h1 id="What-is-cost-function"><a href="#What-is-cost-function" class="headerlink" title="What is cost function?"></a>What is cost function?</h1><p>Let’s begin with an example. Here we have some raw data (red cross) shown in figure below.</p>
 <div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg" title="[Raw Data and Prediction]"><br></div>
 
-<p>These points could be describe well by a linear function, Eq.($\ref{equation_linear}$)</p>
+<p>These points could be describe well by a linear function, called hyphotheis function, Eq.($\ref{equation_linear}$)</p>
 <p>$$<br>\begin{equation}<br>h_{\theta} = \theta_1 * x + \theta_0<br>\label{equation_linear}<br>\end{equation}<br>$$</p>
 <p>And obviously, the second line can describe raw data better than the first one. Question is how can we qunatify the performance of our model. Intuitively, we could define the summation of distance from raw data to prediction points which introduces the mean square error function shown below.</p>
-<p>$$<br>\begin{equation}<br>J_{\theta} = \frac{1}{2m} \sum_{i=1}^{m} \left( h_{\theta} - y \right) ^2<br>\label{equation_cost}<br>\end{equation}<br>$$</p>
+<p>$$<br>\begin{equation}<br>J_{\theta} = \frac{1}{2m} \sum_{i=1}^{m} \left( h_{\theta}^{i} - y^{i} \right) ^2<br>\label{equation_cost}<br>\end{equation}<br>$$</p>
 <p>In Eq.($\ref{equation_cost}$), $\textbf{m}$ is the number of data points, and $\textbf{2}$ in denominator exists only for convinience of gradient calculation. Substituing Eq.(\ref{equation_linear}) into Eq.(\ref{equation_cost}), we can get the cost function surface show below.</p>
 <div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg" title="[Cost Function Surface]"><br></div>
 
 <h1 id="What-is-gradient-descent"><a href="#What-is-gradient-descent" class="headerlink" title="What is gradient descent?"></a>What is gradient descent?</h1><p>Now we have the feature to quantify the performance of a So the only thing we need to do now is trying to find the minimum of cost function and corresponding coordinate $\theta_0$ and $\theta_1$. Imaging we are one a mountain, tring to get to valley as soon as possible. What will you do. <strong>You will look around, finding the steepest direction and walk backward.</strong> Mathmatically, the steepest direction can be described well by gradient, and finding valley behavior can be described by following equation.</p>
 <p>$$<br>\begin{equation}<br>\theta_i^{n+1} =  \theta_i^{n} - \alpha * \frac{\partial J_{\theta}}{\partial \theta_i}<br>\label{equation_gradient}<br>\end{equation}<br>$$</p>
 <p>In Eq.(\ref{equation_gradient}), <strong>$\alpha$</strong> represents your stride, called learning rate. Bigger $\alpha$ means you can get to the valley faster, lossing more scenery, information. So it’s a tricky job to balance the tradeoff between computaional time and accuarcy of model in most of Machine Learning (ML) questions.  <strong>–</strong> means you go toward the opposite direction of the steepest one instead off heading to mountaintop.</p>
+<p>From Eq.(\ref{equation_gradient}), if we can obtain the partial derivative term, we can accomplish gradient descent work. Take mean square error function as an example, we can obtain the genral formation shown below</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \sum_{j=1}^{m} \left( h_{\theta}^{j} - y^{j} \right) * x_i^j<br>\label{equation_partial}<br>\end{equation}<br>$$</p>
+<p><strong>$x_i$</strong> means the ith features in <strong>Hypothesis Function</strong>. Now let’s take $\theta_0$ for instance. Through Eq.(\ref{equation_linear}) we know each $x_0^{j}=(x_0^{j})^0=1$. So the partial derivative is just the average of $h_{\theta} - y$.<br>We can also vectorize Eq.(\ref{equation_partial}) to imporve calculation speed. We assume x, y, $\theta$ are matrixes with $n\times m$, $n \times 1$, and $m \times 1$ dimension respectibely. $n$ and $m$ represents number of features and training examples. In this example, $n=2$ and $m=10$. Obtaining:</p>
+<p>$$<br>\begin{equation}<br>\nabla J = \theta^{T} * \left(h_{\theta}(x) - y\right)<br>\end{equation}<br>$$</p>
 <h1 id="Why-gradient-descent-is-important"><a href="#Why-gradient-descent-is-important" class="headerlink" title="Why gradient descent is important?"></a>Why gradient descent is important?</h1><div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg" title="[Cost Function Surface]"><br></div>
 
 <p>Let’s go back to our first example, we can easily implement gradient descent algorithm to find the local minimum without to many iterations. Trajectory of $\vec\theta$ is shown in figure above. Although this alogorithm is easy, it is really robust and genrally used in ML fields.</p>
