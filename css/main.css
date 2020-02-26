@@ -1378,8 +1378,8 @@ pre .javascript .function {
 .posts-expand .post-body img {
   box-sizing: border-box;
   margin: auto;
-  padding: 3px;
-  border: 1px solid #ddd;
+  padding: 0px;
+  border: 0px solid #ddd;
 }
 .posts-expand .post-body .fancybox img {
   margin: 0 auto 25px;
@@ -1954,7 +1954,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b03b95;
+  background: #d457f9;
 }
 .links-of-blogroll {
   font-size: 13px;

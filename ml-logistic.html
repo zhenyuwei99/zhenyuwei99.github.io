@@ -148,29 +148,32 @@
 
 
 
-  <meta name="description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
+  <meta name="description" content="What is the most common usage of Machine Learning (ML) in research or projects? Classifications, I think. We want to tell the difference between different kinds of stuff, cat or dog, spam or important">
 <meta name="keywords" content="Machine Learning,Julia">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Machine Leaning Note.1 &gt; Cost Function and Gradient Descent">
-<meta property="og:url" content="https://madwayne.com/ml-gradient.html">
+<meta property="og:title" content="Machine Leaning Note.2 &gt; Logistic Regression">
+<meta property="og:url" content="https://madwayne.com/ml-logistic.html">
 <meta property="og:site_name" content="Mad   Wayne">
-<meta property="og:description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
+<meta property="og:description" content="What is the most common usage of Machine Learning (ML) in research or projects? Classifications, I think. We want to tell the difference between different kinds of stuff, cat or dog, spam or important">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg">
-<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg">
-<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg">
-<meta property="og:updated_time" content="2020-02-26T08:56:23.683Z">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/procedure.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/example.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/sigmoid.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/unconvex.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/ce.svg">
+<meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/res.svg">
+<meta property="og:updated_time" content="2020-02-26T14:28:27.048Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Machine Leaning Note.1 &gt; Cost Function and Gradient Descent">
-<meta name="twitter:description" content="This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient">
-<meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg">
+<meta name="twitter:title" content="Machine Leaning Note.2 &gt; Logistic Regression">
+<meta name="twitter:description" content="What is the most common usage of Machine Learning (ML) in research or projects? Classifications, I think. We want to tell the difference between different kinds of stuff, cat or dog, spam or important">
+<meta name="twitter:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/procedure.svg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://madwayne.com/ml-gradient.html">
+  <link rel="canonical" href="https://madwayne.com/ml-logistic.html">
 
 
 
@@ -180,7 +183,7 @@
   };
 </script>
 
-  <title>Machine Leaning Note.1 > Cost Function and Gradient Descent | Mad   Wayne</title>
+  <title>Machine Leaning Note.2 > Logistic Regression | Mad   Wayne</title>
   
 
 
@@ -417,7 +420,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://madwayne.com/zhenyuwei99.github.io/ml-gradient.html">
+    <link itemprop="mainEntityOfPage" href="https://madwayne.com/zhenyuwei99.github.io/ml-logistic.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhenyuWei">
@@ -434,7 +437,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Machine Leaning Note.1 > Cost Function and Gradient Descent
+          <h2 class="post-title" itemprop="name headline">Machine Leaning Note.2 > Logistic Regression
 
               
             
@@ -460,13 +463,9 @@
                 
               
 
-              <time title="Created: 2020-02-26 02:15:58 / Modified: 16:56:23" itemprop="dateCreated datePublished" datetime="2020-02-26T02:15:58+08:00">2020-02-26</time>
+              <time title="Created: 2020-02-26 22:28:27" itemprop="dateCreated datePublished" datetime="2020-02-26T22:28:27+08:00">2020-02-26</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -500,8 +499,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
             
-                <a href="/zhenyuwei99.github.io/ml-gradient.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/zhenyuwei99.github.io/ml-gradient.html" itemprop="commentCount"></span>
+                <a href="/zhenyuwei99.github.io/ml-logistic.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/zhenyuwei99.github.io/ml-logistic.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -522,7 +521,7 @@
           
 
           
-            <div class="post-description">This article is the first one of Machine Learning Notes, which will record my ideas and questions I have ever met during the learning process. In this article, a basic but important concept, gradient descent, will be introduced briefly, and an example will be shown.</div>
+            <div class="post-description">What is the most common usage of Machine Learning (ML) in research or projects? Classifications, I think. We want to tell the difference between different kinds of stuff, cat or dog, spam or important email etc. by a simple model with high efficiency. In this article, a primary method can be used to accomplish those jobs, Logistic Regression (LR) will be introduced. A helpful but straightforward example will also be included to show a more precise view of this smart idea.</div>
           
 
         </div>
@@ -538,26 +537,36 @@
       
 
       
-        <h1 id="1-What-is-cost-function"><a href="#1-What-is-cost-function" class="headerlink" title="1. What is cost function?"></a>1. What is cost function?</h1><p>Let’s begin with an example. Here we have some raw data (red cross) shown in figure below.</p>
-<div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_data.svg" title="[Raw Data and Prediction]"><br></div>
+        <h1 id="1-Genral-procedure-to-train-a-ML-model"><a href="#1-Genral-procedure-to-train-a-ML-model" class="headerlink" title="1. Genral procedure to train a ML model."></a>1. Genral procedure to train a ML model.</h1><p>Before the introduction of principle of LR, I want to conclude the genral procedure to train a ML model, also shown in flowchart below. First, we need to find a proper method to quantify the perfomance of our model to training data, usually a suitable <strong>cost function</strong>. After that, we should choose an algorithm, like <strong>gradient descent</strong>, to find the minimum of cost function, corresponding to the best model. Now we have a model seems good and need to test its <strong>Generalization error</strong>, using test data to validate the accuracy of  model we have, to detect whether overfitting issue have taken place. If the accuracy still looks nice, congratulations, you did it.</p>
+<div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/procedure.svg" title="[Genral Procedure]"><br></div>
 
-<p>These points could be describe well by a linear function, called hyphotheis function, Eq.($\ref{equation_linear}$)</p>
-<p>$$<br>\begin{equation}<br>h_{\theta} = \theta_1 * x + \theta_0<br>\label{equation_linear}<br>\end{equation}<br>$$</p>
-<p>And obviously, the second line can describe raw data better than the first one. Question is how can we qunatify the performance of our model. Intuitively, we could define the summation of distance from raw data to prediction points which introduces the mean square error function shown below.</p>
-<p>$$<br>\begin{equation}<br>J_{\theta} = \frac{1}{2m} \sum_{i=1}^{m} \left( h_{\theta}^{i} - y^{i} \right) ^2<br>\label{equation_cost}<br>\end{equation}<br>$$</p>
-<p>In Eq.($\ref{equation_cost}$), $\textbf{m}$ is the number of data points, and $\textbf{2}$ in denominator exists only for convinience of gradient calculation. Substituing Eq.(\ref{equation_linear}) into Eq.(\ref{equation_cost}), we can get the cost function surface show below.</p>
-<div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_surf.svg" title="[Cost Function Surface]"><br></div>
 
-<h1 id="2-What-is-gradient-descent"><a href="#2-What-is-gradient-descent" class="headerlink" title="2. What is gradient descent?"></a>2. What is gradient descent?</h1><p>Now we have the feature to quantify the performance of a So the only thing we need to do now is trying to find the minimum of cost function and corresponding coordinate $\theta_0$ and $\theta_1$. Imaging we are one a mountain, tring to get to valley as soon as possible. What will you do. <strong>You will look around, finding the steepest direction and walk backward.</strong> Mathmatically, the steepest direction can be described well by gradient, and finding valley behavior can be described by following equation.</p>
-<p>$$<br>\begin{equation}<br>\theta_i^{n+1} =  \theta_i^{n} - \alpha * \frac{\partial J_{\theta}}{\partial \theta_i}<br>\label{equation_gradient}<br>\end{equation}<br>$$</p>
-<p>In Eq.(\ref{equation_gradient}), <strong>$\alpha$</strong> represents your stride, called learning rate. Bigger $\alpha$ means you can get to the valley faster, lossing more scenery, information. So it’s a tricky job to balance the tradeoff between computaional time and accuarcy of model in most of Machine Learning (ML) questions.  <strong>–</strong> means you go toward the opposite direction of the steepest one instead off heading to mountaintop.</p>
-<p>From Eq.(\ref{equation_gradient}), if we can obtain the partial derivative term, we can accomplish gradient descent work. Take mean square error function as an example, we can obtain the genral formation shown below</p>
-<p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \sum_{j=1}^{m} \left( h_{\theta}^{j} - y^{j} \right) * x_i^j<br>\label{equation_partial}<br>\end{equation}<br>$$</p>
-<p><strong>$x_i$</strong> means the ith features in <strong>Hypothesis Function</strong>. Now let’s take $\theta_0$ for instance. Through Eq.(\ref{equation_linear}) we know each $x_0^{j}=(x_0^{j})^0=1$. So the partial derivative is just the average of $h_{\theta} - y$.<br>We can also vectorize Eq.(\ref{equation_partial}) to imporve calculation speed. We assume x, y, $\theta$ are matrixes with $n\times m$, $n \times 1$, and $m \times 1$ dimension respectibely. $n$ and $m$ represents number of features and training examples. In this example, $n=2$ and $m=10$. Obtaining:</p>
-<p>$$<br>\begin{equation}<br>\nabla J = \theta^{T} * \left(h_{\theta}(x) - y\right)<br>\end{equation}<br>$$</p>
-<h1 id="3-Why-gradient-descent-is-important"><a href="#3-Why-gradient-descent-is-important" class="headerlink" title="3. Why gradient descent is important?"></a>3. Why gradient descent is important?</h1><div class="image-size-800" align="center"><br><img src="/zhenyuwei99.github.io/ml-gradient/cost_func_contour.svg" title="[Cost Function Surface]"><br></div>
+<h1 id="2-How-to-describe-classification-questions-Sigmoid-Function"><a href="#2-How-to-describe-classification-questions-Sigmoid-Function" class="headerlink" title="2. How to describe classification questions? Sigmoid Function."></a>2. How to describe classification questions? Sigmoid Function.</h1><div class="image-size-600" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/example.svg" title="[Genral Procedure]"><br></div>
 
-<p>Let’s go back to our first example, we can easily implement gradient descent algorithm to find the local minimum without to many iterations. Trajectory of $\vec\theta$ is shown in figure above. Although this alogorithm is easy, it is really robust and genrally used in ML fields.</p>
+<p>Starting with an example shown in above figure, the first question is how to transform information we have, coordinates, to data we want, type of point: 0 or 1. Here, a nice function, Sigmoid Function $\sigma(x)$, will be introduced.</p>
+<p>$$<br>\begin{equation}<br>\sigma(x) = \frac{1}{1 + e^{-x}}<br>\label{equation_sigmoid}<br>\end{equation}<br>$$</p>
+<p>The formation of Eq.(\ref{equation_sigmoid}) is strightfoward, but results is quite useful shown in figure below. We can transform $n \in \Re$ to interval $[0, 1]$ to meet our requirement. To be more detailed, supposing we have a feature vector $\vec\theta$ and a training data mactix $x$, we can reformulate our <strong>hypothesis function</strong> in Eq.(\ref{equation_hypothesis})。</p>
+<p>$$<br>\begin{equation}<br>h_{\theta}(x) = \frac{1}{1 + e^{-\theta^{T}x}}<br>\label{equation_hypothesis}<br>\end{equation}<br>$$</p>
+<div class="image-size=600" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/sigmoid.svg" title="[Sigmoid Fucntion]"><br></div>
+
+<h1 id="3-Cost-function-Cross-Entropy-Function"><a href="#3-Cost-function-Cross-Entropy-Function" class="headerlink" title="3. Cost function? Cross Entropy Function."></a>3. Cost function? Cross Entropy Function.</h1><p>We have introduced <a href="https://madwayne.com/ml-gradient.html">Mean Square Error function</a> in previous article. However, due to the existence of $\sigma(x)$, Mean Square Error function will be a non convex function as figure below. Gradient descent method is not capable of handling this kind of function as it might  be trapped in local minimum.</p>
+<div class="image-size=600" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/unconvex.svg" title="[non Convex Fucntion]"><br></div>
+
+<p>Here we have a better cost function style, Cross Entropy function:</p>
+<p>$$<br>\begin{equation}<br>J_{\theta} = \frac{1}{m} \sum_{i=1}^{m} \left( -(1 - y^{(i)})  \ast ln(1 - h_{\theta}^{(i)}) - y^{(i)} \ast ln(h_{\theta}^{(i)})  \right)<br>\label{equation_ce}<br>\end{equation}<br>$$</p>
+<p>How does Eq.(\ref{equation_ce}) works for classification problems. As we assume, $y = 1$ or $2$ strictly. So for each data points, only one term counts while the other one is 0. Both terms’ curves in interval $[-1, 1]$ are shown below. Suppose $y=0$, $-ln(1-h_{\theta})$, which counts in this case, has a small value and flat gradient in area approching to 0 corresponds to big and steep occasion in area close to 1. This features means our model will be punished greatly when we have prediction value close to 1 which is resonable, vice versa to case $y=1$.</p>
+<div class="image-size=600" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/ce.svg" title="[Cross Entropy]"><br></div>
+
+<p>To implement gradient descent algorithm, the only thing left for us is the gradient of Eq.(\ref{equation_ce}), which is shown below:</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \frac{1}{m} \sum_{j=1}^{m} \left[ \left( \frac{1 - y^{(j)}}{1 - h_{\theta}^{(j)}} - \frac{y^{(j)}}{h_{\theta}^{(j)}} \right) \ast \frac{\partial h_{\theta}}{\partial \theta_i} \right]<br>\label{equation_grad_pri}<br>\end{equation}<br>$$</p>
+<p>Through Eq.(\ref{equation_hyphothesis}}]), the last term in left hand can be rewritten as:</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial h_{\theta}}{\partial \theta_i} = - \frac{- x_i \ast e^{-\theta^T x}}{(1 + e^{-\theta^Tx})^2} = h_{\theta} \ast (1-h_{\theta}) \ast x_i<br>\label{equation_dhypo}<br>\end{equation}<br>$$</p>
+<p>If we substitue Eq.(\ref{equation_dhypo}) to Eq.(\ref{equation_grad_pri}), we can get the final gradient, a simple and similar equation with what we disscused in <a href="https://madwayne.com/ml-gradient.html">previous artical</a> for <strong>Mean Square Error</strong> function.</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \frac{1}{m} \sum_{j=1}^{m} \left[ \left( h_{\theta}^{(j)} - y^{(j)} \right) * x_i^{(j)} \right]<br>\label{equation_gradient}<br>\end{equation}<br>$$</p>
+<p>Now using Eq.(\ref{equation_gradient}), we can implement gradient descent algorithm to accomplish our example in the beginning. Two results are shown in figure below, second one obviously has a poorer performance due to too much features, which we called <strong>overfitting probelm</strong>. Overfitting problems is a big issue in ML fields which will be discussed further in other article.</p>
+<div class="image-size=800" align="center"><br><img src="/zhenyuwei99.github.io/ml-logistic/res.svg" title="[Fitting Result]"><br></div>
+
+<h1 id="4-How-to-deal-will-multi-classes-qustions-One-vs-All-algorithm"><a href="#4-How-to-deal-will-multi-classes-qustions-One-vs-All-algorithm" class="headerlink" title="4. How to deal will multi-classes qustions? One vs All algorithm"></a>4. How to deal will multi-classes qustions? One vs All algorithm</h1><p>The last question is that if we have data belongs to more than two classes, what can we do? Now with LR algorithm, the only way is to train multi-times, n times for n classes. In each turn, we treat data in one class as 0 or 1, and rest of data will all be treated to the other. Each time we will get a model to distinct data from 1 specif class to other. However this method is sort of clumsy. Better methods like <strong>Neural Network</strong> will be introduced in future article.</p>
 
       
     </div>
@@ -571,7 +580,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/zhenyuwei99.github.io/ml-logistic.html" rel="bookmark">Machine Leaning Note.2 > Logistic Regression</a></div>
+      <div class="popular-posts-title"><a href="/zhenyuwei99.github.io/ml-gradient.html" rel="bookmark">Machine Leaning Note.1 > Cost Function and Gradient Descent</a></div>
       
     </li>
   
@@ -632,8 +641,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/zhenyuwei99.github.io/born.html" rel="next" title="人生开始时的自由">
-                <i class="fa fa-chevron-left"></i> 人生开始时的自由
+              <a href="/zhenyuwei99.github.io/ml-gradient.html" rel="next" title="Machine Leaning Note.1 > Cost Function and Gradient Descent">
+                <i class="fa fa-chevron-left"></i> Machine Leaning Note.1 > Cost Function and Gradient Descent
               </a>
             
           </div>
@@ -641,10 +650,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/zhenyuwei99.github.io/ml-logistic.html" rel="prev" title="Machine Leaning Note.2 > Logistic Regression">
-                Machine Leaning Note.2 > Logistic Regression <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -875,7 +880,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-What-is-cost-function"><span class="nav-text">1. What is cost function?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-What-is-gradient-descent"><span class="nav-text">2. What is gradient descent?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Why-gradient-descent-is-important"><span class="nav-text">3. Why gradient descent is important?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Genral-procedure-to-train-a-ML-model"><span class="nav-text">1. Genral procedure to train a ML model.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-How-to-describe-classification-questions-Sigmoid-Function"><span class="nav-text">2. How to describe classification questions? Sigmoid Function.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Cost-function-Cross-Entropy-Function"><span class="nav-text">3. Cost function? Cross Entropy Function.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-How-to-deal-will-multi-classes-qustions-One-vs-All-algorithm"><span class="nav-text">4. How to deal will multi-classes qustions? One vs All algorithm</span></a></li></ol></div>
             
 
           </div>
