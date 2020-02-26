@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://madwayne.com/avengers.html</loc>
+    
+    <lastmod>2020-02-26T14:42:15.176Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://madwayne.com/ml-logistic.html</loc>
     
     <lastmod>2020-02-26T14:28:27.048Z</lastmod>
@@ -75,13 +82,6 @@
     <loc>https://madwayne.com/lammps-gpu-acc.html</loc>
     
     <lastmod>2020-02-25T13:28:42.898Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://madwayne.com/avengers.html</loc>
-    
-    <lastmod>2020-02-25T13:19:25.658Z</lastmod>
     
   </url>
   
