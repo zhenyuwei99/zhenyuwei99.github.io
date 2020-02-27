@@ -162,7 +162,7 @@
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/unconvex.svg">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/ce.svg">
 <meta property="og:image" content="https://madwayne.com/zhenyuwei99.github.io/ml-logistic/res.svg">
-<meta property="og:updated_time" content="2020-02-27T05:15:09.846Z">
+<meta property="og:updated_time" content="2020-02-27T06:06:00.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Machine Leaning Note.2 &gt; Logistic Regression">
 <meta name="twitter:description" content="What is the most common usage of Machine Learning (ML) in research or projects? Classifications, I think. We want to tell the difference between different kinds of stuff, cat or dog, spam or important">
@@ -480,7 +480,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-02-27 13:15:09" itemprop="dateModified" datetime="2020-02-27T13:15:09+08:00">2020-02-27</time>
+                <time title="Modified: 2020-02-27 14:06:00" itemprop="dateModified" datetime="2020-02-27T14:06:00+08:00">2020-02-27</time>
               
             
           </span>
@@ -576,7 +576,7 @@
 <p>To implement gradient descent algorithm, the only thing left for us is the gradient of Eq.(\ref{equation_ce}), which is shown below:</p>
 <p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \frac{1}{m} \sum_{j=1}^{m} \left[ \left( \frac{1 - y^{(j)}}{1 - h_{\theta}^{(j)}} - \frac{y^{(j)}}{h_{\theta}^{(j)}} \right) \ast \frac{\partial h_{\theta}}{\partial \theta_i} \right]<br>\label{equation_grad_pri}<br>\end{equation}<br>$$</p>
 <p>Through Eq.(\ref{equation_hyphothesis}}]), the last term in left hand can be rewritten as:</p>
-<p>$$<br>\begin{equation}<br>\frac{\partial h_{\theta}}{\partial \theta_i} = - \frac{- x_i \ast e^{-\theta^T x}}{(1 + e^{-\theta^Tx})^2} = - h_{\theta} \ast (1-h_{\theta}) \ast x_i<br>\label{equation_dhypo}<br>\end{equation}<br>$$</p>
+<p>$$<br>\begin{equation}<br>\frac{\partial h_{\theta}}{\partial \theta_i} = - \frac{- x_i \ast e^{-\theta^T x}}{(1 + e^{-\theta^Tx})^2} = h_{\theta} \ast (1-h_{\theta}) \ast x_i<br>\label{equation_dhypo}<br>\end{equation}<br>$$</p>
 <p>If we substitue Eq.(\ref{equation_dhypo}) to Eq.(\ref{equation_grad_pri}), we can get the final gradient, a simple and similar equation with what we disscused in <a href="https://madwayne.com/ml-gradient.html">previous artical</a> for <strong>Mean Square Error</strong> function.</p>
 <p>$$<br>\begin{equation}<br>\frac{\partial J_{\theta}}{\partial \theta_i} = \frac{1}{m} \sum_{j=1}^{m} \left[ \left( h_{\theta}^{(j)} - y^{(j)} \right) * x_i^{(j)} \right]<br>\label{equation_gradient}<br>\end{equation}<br>$$</p>
 <h1 id="4-How-to-tell-difference-Decision-boundary"><a href="#4-How-to-tell-difference-Decision-boundary" class="headerlink" title="4. How to tell difference? Decision boundary"></a>4. How to tell difference? Decision boundary</h1><p>Now using Eq.(\ref{equation_gradient}), we can implement gradient descent algorithm to get $\vec\theta$. Next, we need to define a threshold value for the distinction between two types. Here we define this value equals to <strong>0.5</strong>, considering the range of Eq.(\ref{equation_hypothesis}) is $[0, 1]$. So we only need to find all the point that satisfy $\theta^Tx=0$. Boundary constructed by all those points is called <strong>Decision Boundary</strong>.</p>
